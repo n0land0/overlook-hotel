@@ -1,4 +1,4 @@
-# What's Cookin'?
+# Overlook Hotel
 
 ## Abstract
 
@@ -6,11 +6,11 @@ What's Cookin' is a recipe tracking / meal planning application that allows user
 
 ## Installation
 
-1. Clone down [client side app](https://github.com/n0land0/whats-cookin) to your local machine.
-2. Clone down [local server](https://github.com/turingschool-examples/whats-cookin-api) to a different folder.
-3. Run `npm install` on your root folder of the two cloned down repo.
-4. In local server folder, run `npm start` to launch local server.
-5. In client app folder, run `npm start` and visit the opened port in browser.
+1. Clone the [client-side application](https://github.com/n0land0/overlook-hotel) to your local machine.
+2. Clone the [Overlook API](https://github.com/turingschool-examples/overlook-api) to a separate directory.
+3. In the API's root directory, run `npm install` to install dependencies, then `npm start` to launch the server for the API.
+4. In the application's root directory, run `npm install` to install dependencies, then `npm start` to launch the app server.
+5. Copy the `http://localhost:<number>` URL returned by the previous step and visit the URL in your browser.
 6. Start messing around on the page!
 
 ## Usage and Demonstration
@@ -21,15 +21,15 @@ Please see our demo video [here](https://www.youtube.com/watch?v=aHChq0GsRFE).
 
 **This app was developed using:**
 
-- HTML
-- CSS
-- SCSS
+- HTML5
+- CSS/SCSS
 - JavaScript
-- NPM
-- Mocha and chai testing frameworks
+- Mocha and Chai testing frameworks
 - DOM API
 - Fetch API
 - Webpack
+- NPM
+- (Dependencies?)
 
 ## Wins and Challenges
 
@@ -54,19 +54,16 @@ Please see our demo video [here](https://www.youtube.com/watch?v=aHChq0GsRFE).
 
 ## Contributions
 
-**Developers:**
+**Developer:**
 
 _This app was developed by:_
 
-- [Carlos Gomez](https://github.com/karmacarlos)
-- [Bei Zhang](https://github.com/lokiandfengshui)
-- [Raquel Hill](https://github.com/Raquelhill)
 - [Nolan Caine](https://github.com/n0land0)
 
-_Carlos, Bei, Raquel, and Nolan are students of front-end engineering at the Turing School of Software & Design._
+_Nolan is a student of front-end engineering at the [Turing School of Software & Design](https://turing.edu/)._
 
 **Project Manager**
 
-- [Nik Seif](https://github.com/niksseif)
+- [Hannah Hudson](https://github.com/hannahhch)
 
-[Project spec](https://frontend.turing.edu/projects/What%27sCookin-PartOne.html) and assets provided by the [Turing School of Software & Design](https://turing.edu/).
+[Project spec](https://frontend.turing.edu/projects/overlook.html) and assets provided by the [Turing School of Software & Design](https://turing.edu/).
