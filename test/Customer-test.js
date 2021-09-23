@@ -18,15 +18,15 @@ describe('Customer', () => {
     customer = new Customer(customers);
   });
 
-  it.skip('should be a function', () => {
+  it('should be a function', () => {
     assert.isFunction(Customer);
   });
 
-  it.skip('should be an instance of Customer', () => {
+  it('should be an instance of Customer', () => {
     assert.instanceOf(customer, Customer);
   });
 
-  it.skip('should take in customer data', () => {
+  it('should take in customer data', () => {
 
   });
 
