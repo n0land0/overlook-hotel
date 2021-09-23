@@ -6,6 +6,7 @@ class Room {
     this.bedSize = roomObj.bedSize;
     this.numBeds = roomObj.numBeds;
     this.costPerNight = roomObj.costPerNight;
+    this.bookedDates = [];
   }
 }
 
