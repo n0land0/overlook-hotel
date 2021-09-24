@@ -8,6 +8,12 @@ class Room {
     this.costPerNight = roomObj.costPerNight;
     this.bookedDates = [];
   }
+  populateBookedDates(bookingsArr) {
+    // all-time history of bookings
+    this.bookedDates = bookingsArr.filter(booking =>
+      booking.roomNumber === this.number
+    ).map(booking => booking.date)
+  }
 }
 
 export default Room;
