@@ -1,11 +1,17 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import {
+  getAll,
+  getSingleCustomer,
+  addBooking,
+  removeBooking
+} from './apiCalls'
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+getAll("customers")
+getAll("bookings")
+getAll("rooms")
 
+getSingleCustomer(11)
 
-console.log('This is the JavaScript entry file - your code begins here.');
+addBooking(1, "2020/01/01", 1)
+
+removeBooking(1632451293145)
