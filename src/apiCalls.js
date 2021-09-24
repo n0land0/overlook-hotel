@@ -27,7 +27,7 @@ const addBooking = (userID, date, roomNumber) => {
     }
   })
   .then(response => response.json())
-  .then(data => console.log(data))
+  // .then(data => console.log(data))
 }
 
 // DELETE remove booking
@@ -36,7 +36,7 @@ const removeBooking = (bookingID) => {
     method: "DELETE"
   })
   .then(response => response.json())
-  .then(data => console.log(data))
+  // .then(data => console.log(data))
 }
 
 export {

@@ -1,4 +1,3 @@
-// import './images/turing-logo.png'
 import './css/base.scss';
 import {
   getAll,
