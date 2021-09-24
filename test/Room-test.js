@@ -13,9 +13,9 @@ import Room from '../src/classes/Room';
 
 describe('Room', () => {
   let room;
-
   beforeEach(() => {
-    room = new Room(rooms);
+    room = new Room(rooms[6]);
+    // room.populateBookedDates(bookings);
   });
 
   it('should be a function', () => {
@@ -27,14 +27,26 @@ describe('Room', () => {
   });
 
   it('should take in room data', () => {
-
+    assert.property(room, 'bidet');
   });
 
-  it.skip('', () => {});
+  it('should start without booked dates, which are not provided by the API', () => {
+    assert.equal(room.unavailableDates.length, 0);
+  });
 
-  it.skip('', () => {});
+  it('should be able to keep track of the dates for which it\'s booked', () => {
+    room.populateUnavailableDates(bookings);
 
-  it.skip('', () => {});
+    assert.equal(room.unavailableDates.length, 1)
+  });
+
+  it('should not contain bookings from other rooms', () => {
+    room.populateBookings(bookings);
+
+    let didFilterFail = room.unavailableDates.some(booking => booking.roomNumber !== room.number);
+
+    assert.equal(didFilterFail, false);
+  });
 
   it.skip('', () => {});
 

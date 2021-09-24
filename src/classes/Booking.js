@@ -10,15 +10,20 @@ class Booking {
   calculateTotalCost(roomsArr) {
     if (typeof this.date === "string") {
       // one night
+        // = is less risky than += (if run multiple times)
         this.totalCost = roomsArr.find(room =>
           room.number === this.roomNumber
-        ).costPerNight + this.roomServiceCharges;
+        ).costPerNight;
     } else {
       // multiple nights
+        // = is less risky than += (if run multiple times)
       this.totalCost = (roomsArr.find(room =>
         room.number === this.roomNumber
-      ).costPerNight) * this.date.length + this.roomServiceCharges;
+      ).costPerNight) * this.date.length;
     }
+    this.roomServiceCharges.forEach(charge => {
+      this.totalCost += charge;
+    });
     return this.totalCost;
   }
 }

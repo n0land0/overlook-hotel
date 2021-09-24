@@ -38,8 +38,9 @@ const storeFetchedData = (responseArray) => {
   rooms = responseArray[3].map(roomObj => new Room(roomObj));
 
   currentCustomer.populateBookings(bookings)
+  currentCustomer.calculateTotalSpent(rooms)
   bookings[1].calculateTotalCost(rooms)
-  rooms[0].populateBookedDates(bookings)
+  rooms[0].populateUnavailableDates(bookings)
 
   // console.log(hotel)
   // console.log(currentCustomer)
@@ -49,6 +50,7 @@ const storeFetchedData = (responseArray) => {
   console.log(currentCustomer.id)
   console.log(currentCustomer.name)
   console.log(currentCustomer.bookings)
+  console.log(currentCustomer.totalSpent)
 
   console.log(bookings[1])
   console.log(rooms[0])
