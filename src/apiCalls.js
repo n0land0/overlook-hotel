@@ -1,37 +1,50 @@
-// GET all customers
-const getAllCustomers = () => {
-  return fetch("http://localhost:3001/api/v1/customers")
+// GET all (customers, bookings, rooms)
+const getAll = (dataCategory) => {
+  return fetch(`http://localhost:3001/api/v1/${dataCategory}`)
   .then(response => response.json())
-  .then(parsed => parsed.customers)
-  .then(data => console.log(data))
+  .then(parsed => parsed[dataCategory])
+  // .then(data => console.log(data))
 }
 
 // GET single customer
-const getOneCustomer = (userID) => {
+const getSingleCustomer = (userID) => {
   return fetch(`http://localhost:3001/api/v1/customers/${userID}`)
   .then(response => response.json())
   // .then(parsed => console.log(parsed));
 }
 
-// GET all bookings
-const getAllBookings = () => {
-  return fetch("http://localhost:3001/api/v1/bookings")
+// POST add new booking
+const addBooking = (userID, date, roomNumber) => {
+  return fetch("http://localhost:3001/api/v1/bookings", {
+    method: "POST",
+    body: JSON.stringify({
+      userID,
+      date,
+      roomNumber
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
   .then(response => response.json())
-  .then(parsed => parsed.bookings)
   .then(data => console.log(data))
 }
 
-// GET all rooms
-const getAllRooms = () => {
-  return fetch("http://localhost:3001/api/v1/rooms")
+// DELETE remove booking
+const removeBooking = (bookingID) => {
+  return fetch(`http://localhost:3001/api/v1/bookings/${bookingID}`, {
+    method: "DELETE"
+  })
   .then(response => response.json())
-  .then(parsed => parsed.rooms)
   .then(data => console.log(data))
 }
+
+let tempBookingID
 
 export {
-  getAllCustomers,
-  getOneCustomer,
-  getAllBookings,
-  getAllRooms
+  getAll,
+  getSingleCustomer,
+  addBooking,
+  removeBooking,
+  tempBookingID
 };

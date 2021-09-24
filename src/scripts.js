@@ -1,13 +1,18 @@
 // import './images/turing-logo.png'
 import './css/base.scss';
 import {
-  getAllCustomers,
-  getOneCustomer,
-  getAllBookings,
-  getAllRooms
+  getAll,
+  getSingleCustomer,
+  addBooking,
+  removeBooking
 } from './apiCalls'
 
-getAllCustomers()
-// console.log(getOneCustomer(1))
-getAllBookings()
-getAllRooms()
+getAll("customers")
+getAll("bookings")
+getAll("rooms")
+
+getSingleCustomer(11)
+
+addBooking(1, "2020/01/01", 1)
+
+removeBooking(1632451293145)
