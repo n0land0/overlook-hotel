@@ -39,12 +39,9 @@ const removeBooking = (bookingID) => {
   .then(data => console.log(data))
 }
 
-let tempBookingID
-
 export {
   getAll,
   getSingleCustomer,
   addBooking,
-  removeBooking,
-  tempBookingID
+  removeBooking
 };
