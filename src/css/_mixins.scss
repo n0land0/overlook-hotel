@@ -21,3 +21,7 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin card-corners() {
+  border-radius: $card-corners;
+}
