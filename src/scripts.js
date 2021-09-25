@@ -31,29 +31,40 @@ window.addEventListener("load", () => {
 })
 
 const storeFetchedData = (responseArray) => {
-  hotel = new Hotel();
-  currentCustomer = new Customer(responseArray[0]);
-  customers = responseArray[1].map(customerObj => new Customer(customerObj));
-  bookings = responseArray[2].map(bookingObj => new Booking(bookingObj));
-  rooms = responseArray[3].map(roomObj => new Room(roomObj));
+  // hotel = new Hotel(customers, bookings, rooms);
+  // currentCustomer = new Customer(responseArray[0]);
+  // customers = responseArray[1].map(customerObj => new Customer(customerObj));
+  customers = responseArray[1];
+  // bookings = responseArray[2].map(bookingObj => new Booking(bookingObj));
+  bookings = responseArray[2];
+  // rooms = responseArray[3].map(roomObj => new Room(roomObj));
+  rooms = responseArray[3];
+  hotel = new Hotel(customers, bookings, rooms);
+  hotel.instantiateAll();
+  currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
 
-  currentCustomer.populateBookings(bookings)
-  currentCustomer.calculateTotalSpent(rooms)
-  bookings[1].calculateTotalCost(rooms)
-  rooms[0].populateUnavailableDates(bookings)
+  console.log(currentCustomer);
+  currentCustomer.populateBookings(hotel.bookings)
+  console.log("Populate single customer bookings: ", currentCustomer.bookings)
+  console.log("Calculate single customer spending: ", currentCustomer.calculateTotalSpent(hotel.rooms))
+  console.log("Calculate single booking cost: ", hotel.bookings[1].calculateTotalCost(hotel.rooms))
+  console.log("Populate room unavailability: ". hotel.rooms[0].populateUnavailableDates(hotel.bookings))
 
   // console.log(hotel)
   // console.log(currentCustomer)
   // console.log(customers)
   // console.log(bookings)
   // console.log(rooms)
-  console.log(currentCustomer.id)
-  console.log(currentCustomer.name)
-  console.log(currentCustomer.bookings)
-  console.log(currentCustomer.totalSpent)
 
-  console.log(bookings[1])
-  console.log(rooms[0])
+  // console.log(currentCustomer.id)
+  // console.log(currentCustomer.name)
+  // console.log(currentCustomer.bookings)
+  // console.log(currentCustomer.totalSpent)
+
+  // console.log(bookings[1])
+  // console.log(rooms[0])
+
+  console.log(hotel)
 }
 
 // getAll("customers")
