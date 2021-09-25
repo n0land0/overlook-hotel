@@ -73,7 +73,7 @@ const storeFetchedData = (responseArray) => {
   // console.log(bookings[1])
   // console.log(rooms[0])
 
-  domUpdates.renderBookings(currentCustomer.bookings);
+  domUpdates.renderBookings(currentCustomer, rooms);
 }
 
 // getAll("customers")

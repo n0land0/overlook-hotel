@@ -1,20 +1,24 @@
 // selectors
 const viewBookings = document.getElementById("view-bookings");
+const totalSpent = document.getElementById("total-spent");
 const containerBookingCards = document.getElementById("container-booking-cards");
 
 // methods
 const domUpdates = {
-  renderBookings(currentCustomerBookings) {
-    currentCustomerBookings.forEach(bookingObj => {
+  renderBookings(currentCustomer, roomsArr) {
+    currentCustomer.bookings.forEach(bookingObj => {
+      bookingObj.getRoomType(roomsArr);
       containerBookingCards.innerHTML += `
         <article class="booking-card">
           <p>${bookingObj.date}</p>
           <p>${bookingObj.id}</p>
+          <p>${bookingObj.roomType}</p>
           <p>${bookingObj.roomNumber}</p>
           <p>${bookingObj.totalCost}</p>
         </article>
       `
     })
+    totalSpent.innerText = `$${currentCustomer.totalSpent}`;
   },
 
   show(element) {
