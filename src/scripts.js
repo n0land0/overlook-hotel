@@ -10,6 +10,7 @@ import {
   addBooking,
   removeBooking
 } from "./apiCalls"
+import domUpdates from "./domUpdates";
 
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
@@ -72,6 +73,7 @@ const storeFetchedData = (responseArray) => {
   // console.log(bookings[1])
   // console.log(rooms[0])
 
+  domUpdates.renderBookings(currentCustomer.bookings);
 }
 
 // getAll("customers")
