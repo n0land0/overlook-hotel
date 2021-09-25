@@ -6,10 +6,18 @@
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
+  // position: fixed;
 }
 
 @mixin flex-column-center() {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-row-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

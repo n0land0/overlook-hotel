@@ -1,11 +1,12 @@
 // selectors
 const viewBookings = document.getElementById("view-bookings");
+const containerBookingCards = document.getElementById("container-booking-cards");
 
 // methods
 const domUpdates = {
   renderBookings(currentCustomerBookings) {
     currentCustomerBookings.forEach(bookingObj => {
-      viewBookings.innerHTML += `
+      containerBookingCards.innerHTML += `
         <article class="booking-card">
           <p>${bookingObj.date}</p>
           <p>${bookingObj.id}</p>

@@ -11,33 +11,41 @@ html {
   font-size: 1vw;
   width: 100vw;
   height: 100vh;
+  font-family: $main-font;
 }
 
 header {
   display: flex;
   width: 100%;
-  background-color: gray;
-  opacity: 50%;
-  font-family: 'Gemunu Libre', sans-serif;
+  background-color: $elements-bkgd-color;
+  // font-family: $main-font;
   font-size: 12rem;
-  overflow-x: scroll;
   z-index: 1;
   position: fixed;
   bottom: 0;
     // padding-bottom: 10px;
 }
 
-// main {
 body {
   @include landing-background();
+  // font-family: $main-font;
   // background-image: $landing-background;
   // background-image: url("../images/pineapple_PNG2738.png");
+}
+
+main {
+  @include flex-row-center();
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
 .container-book-now-and-view-bookings {
   display: flex;
   justify-content: space-around;
-  // height: 100%;
+  // align-items: center;
+  height: 50vh;
+  width: 100%;
 }
 
 .book-now,
@@ -45,8 +53,20 @@ label {
   @include flex-column-center();
 }
 
+// .book-now,
+.date-range-select,
+.view-bookings {
+  background-color: $elements-bkgd-color;
+}
+
+// .book-now {
+.date-range-select {
+  height: 10rem;
+  padding: .25rem 2rem 1rem 2rem;
+}
+
 label {
-  font-family: 'Gemunu Libre', sans-serif;
+  // font-family: $main-font;
 }
 
 .date-range-select {
@@ -57,12 +77,25 @@ label {
 input[type="date"] {
   padding: 1rem;
   border: none;
-  font-family: 'Gemunu Libre', sans-serif;
+  // font-family: $main-font;
 }
 
 .view-bookings {
   overflow-y: scroll;
   position: relative;
+  @include flex-column-center();
+}
+
+.container-booking-header {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 1rem 0 .5rem 0;
+}
+
+.container-booking-cards {
+  overflow: scroll;
+  // position: relative;
 }
 
 .booking-card {
@@ -71,6 +104,6 @@ input[type="date"] {
   justify-content: space-between;
   background-color: white;
   padding: 1rem;
-  margin: 1rem;
+  margin: 0 1rem 1rem 2rem;
   border-radius: .25rem;
 }
