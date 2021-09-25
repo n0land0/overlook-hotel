@@ -59,6 +59,7 @@ label {
 .date-range-select,
 .view-bookings {
   background-color: $elements-bkgd-color;
+  @include card-corners();
 }
 
 .date-range-select {
@@ -74,6 +75,10 @@ input[type="date"] {
   border: none;
   font-size: 1rem;
   font-family: $main-font;
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }
 
 .view-bookings {
@@ -105,5 +110,5 @@ input[type="date"] {
   background-color: white;
   padding: 1rem;
   margin: 0 2rem 2rem 2rem;
-  border-radius: .25rem;
+  @include card-corners();
 }
