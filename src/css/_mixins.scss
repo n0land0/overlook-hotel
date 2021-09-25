@@ -1,1 +1,7 @@
 @import '_variables';
+
+@mixin landing-background() {
+  background: $landing-background;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -1,3 +1,18 @@
 @import '_reset';
 @import '_variables';
 @import '_mixins';
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+html {
+  font-size: 1vw;
+}
+
+body {
+  @include landing-background();
+  // background-image: $landing-background;
+  // background-image: url("../images/pineapple_PNG2738.png");
+}
