@@ -9,7 +9,11 @@ class Customer {
   }
   //any room bookings I have made
   populateBookings(bookingsArr) {
-    this.bookings = bookingsArr.filter(bookingObj => bookingObj.userID === this.id)
+    this.bookings = bookingsArr.filter(bookingObj =>
+      bookingObj.userID === this.id
+    ).sort((bookingObjA, bookingObjB) =>
+      new Date(bookingObjB.date) - new Date(bookingObjA.date)
+    )
   }
   // the total amount I have spent on rooms
   calculateTotalSpent(roomsArr) {
