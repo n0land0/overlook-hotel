@@ -1,6 +1,3 @@
 @import '_reset';
 @import '_variables';
-
-body {
-  background: $primary-background;
-}
+@import '_mixins';
