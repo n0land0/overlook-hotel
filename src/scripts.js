@@ -1,17 +1,82 @@
-import './css/base.scss';
+// imports
+import "./css/base.scss";
 import {
   getAll,
   getSingleCustomer,
   addBooking,
   removeBooking
-} from './apiCalls'
+} from "./apiCalls"
 
-getAll("customers")
-getAll("bookings")
-getAll("rooms")
+import Hotel from "./classes/Hotel"
+import Customer from "./classes/Customer"
+import Booking from "./classes/Booking"
+import Room from "./classes/Room"
 
-getSingleCustomer(11)
+// global variables
+let hotel;
+let currentCustomer;
+let customers;
+let bookings;
+let rooms;
 
-addBooking(1, "2020/01/01", 1)
+// event listeners
+window.addEventListener("load", () => {
+  Promise.all([
+    getSingleCustomer(50),
+    getAll("customers"),
+    getAll("bookings"),
+    getAll("rooms")
+  ])
+  .then(responseArray => storeFetchedData(responseArray))
+})
 
-removeBooking(1632451293145)
+const storeFetchedData = (responseArray) => {
+  // hotel = new Hotel(customers, bookings, rooms);
+  // currentCustomer = new Customer(responseArray[0]);
+  // customers = responseArray[1].map(customerObj => new Customer(customerObj));
+  customers = responseArray[1];
+  // bookings = responseArray[2].map(bookingObj => new Booking(bookingObj));
+  bookings = responseArray[2];
+  // rooms = responseArray[3].map(roomObj => new Room(roomObj));
+  rooms = responseArray[3];
+  hotel = new Hotel(customers, bookings, rooms);
+  hotel.instantiateAll();
+  currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
+
+  console.log(currentCustomer);
+  currentCustomer.populateBookings(hotel.bookings)
+  console.log("Populate single customer bookings: ", currentCustomer.bookings)
+  console.log("Calculate single customer spending: ", currentCustomer.calculateTotalSpent(hotel.rooms))
+  console.log("Calculate single booking cost: ", hotel.bookings[1].calculateTotalCost(hotel.rooms))
+  console.log("Populate room unavailability: ". hotel.rooms[0].populateUnavailableDates(hotel.bookings))
+
+  // console.log(hotel)
+  // console.log(currentCustomer)
+  // console.log(customers)
+  // console.log(bookings)
+  // console.log(rooms)
+
+  // console.log(currentCustomer.id)
+  // console.log(currentCustomer.name)
+  // console.log(currentCustomer.bookings)
+  // console.log(currentCustomer.totalSpent)
+
+  // console.log(bookings[1])
+  // console.log(rooms[0])
+
+  console.log(hotel)
+}
+
+// getAll("customers")
+// getAll("bookings")
+// getAll("rooms")
+//
+// getSingleCustomer(11)
+//
+// addBooking(1, "2020/01/01", 1)
+//
+// removeBooking(1632451293145)
+
+const checkData = dataSet => {
+  return !Object.keys(dataSet).length || Object.values(dataSet).includes(undefined);
+}
