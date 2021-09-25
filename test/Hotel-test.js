@@ -15,7 +15,7 @@ describe('Hotel', () => {
   let hotel;
 
   beforeEach(() => {
-    hotel = new Hotel();
+    hotel = new Hotel(customers, bookings, rooms);
   });
 
   it('should be a function', () => {
@@ -26,13 +26,30 @@ describe('Hotel', () => {
     assert.instanceOf(hotel, Hotel);
   });
 
-  it('should take in ? data', () => {
-
+  it('should take in customer data', () => {
+    assert.property(hotel.customers[0], "id");
+    assert.property(hotel.customers[0], "name");
+    assert.deepEqual(hotel.customers[0], customers[0]);
   });
 
-  it.skip('', () => {});
+  it('should take in booking data', () => {
+    assert.property(hotel.bookings[0], "id");
+    assert.property(hotel.bookings[0], "userID");
+    assert.property(hotel.bookings[0], "date");
+    assert.property(hotel.bookings[0], "roomNumber");
+    assert.property(hotel.bookings[0], "roomServiceCharges");
+    assert.deepEqual(hotel.bookings[0], bookings[0]);
+  });
 
-  it.skip('', () => {});
+  it('should take in room data', () => {
+    assert.property(hotel.rooms[0], "number");
+    assert.property(hotel.rooms[0], "roomType");
+    assert.property(hotel.rooms[0], "bidet");
+    assert.property(hotel.rooms[0], "bedSize");
+    assert.property(hotel.rooms[0], "numBeds");
+    assert.property(hotel.rooms[0], "costPerNight");
+    assert.deepEqual(hotel.rooms[0], rooms[0]);
+  });
 
   it.skip('', () => {});
 

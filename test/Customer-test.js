@@ -15,7 +15,7 @@ describe('Customer', () => {
   let customer;
 
   beforeEach(() => {
-    customer = new Customer(customers);
+    customer = new Customer(customers[0]);
   });
 
   it('should be a function', () => {
@@ -27,10 +27,27 @@ describe('Customer', () => {
   });
 
   it('should take in customer data', () => {
-
+    assert.equal(customer.id, customers[0].id);
+    assert.equal(customer.name, customers[0].name);
   });
 
-  it.skip('', () => {});
+  it('should start without booking information, which is not provided by the API', () => {
+    assert.equal(customer.bookings.length, 0);
+  });
+
+  it('should keep track of any bookings a customer has made', () => {
+    customer.populateBookings(bookings);
+
+    assert.equal(customer.bookings.length, bookings.filter(booking => booking.userID === customer.id).length);
+  });
+
+  it('should not keep track of bookings from other customers', () => {
+    customer.populateBookings(bookings);
+
+    let didFilterFail = customer.bookings.some(booking => booking.userID !== customer.id);
+
+    assert.equal(didFilterFail, false);
+  });
 
   it.skip('', () => {});
 

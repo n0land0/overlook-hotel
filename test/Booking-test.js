@@ -15,7 +15,7 @@ describe('Booking', () => {
   let booking;
 
   beforeEach(() => {
-    booking = new Booking(bookings);
+    booking = new Booking(bookings[2]);
   });
 
   it('should be a function', () => {
@@ -27,12 +27,30 @@ describe('Booking', () => {
   });
 
   it('should take in booking data', () => {
-
+    assert.equal(booking.id, bookings[2].id);
+    assert.equal(booking.userID, bookings[2].userID);
+    assert.equal(booking.date, bookings[2].date);
+    assert.equal(booking.roomNumber, bookings[2].roomNumber);
+    assert.equal(booking.roomServiceCharges, bookings[2].roomServiceCharges);
   });
 
-  it.skip('', () => {});
+  it('should start without cost information, which is not provided by the API', () => {
+    assert.equal(booking.totalCost, 0);
+  });
 
-  it.skip('', () => {});
+  it('should be able to calculate its own cost', () => {
+    booking.calculateTotalCost(rooms);
+
+    assert.equal(booking.totalCost, rooms[6].costPerNight);
+  });
+
+  it('should be able to update its own cost', () => {
+    booking.calculateTotalCost(rooms);
+    booking.roomServiceCharges.push(5);
+    booking.calculateTotalCost(rooms);
+
+    assert.equal(booking.totalCost, rooms[6].costPerNight + 5);
+  });
 
   it.skip('', () => {});
 

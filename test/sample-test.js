@@ -7,13 +7,13 @@ import {
   rooms
 } from './test-data.js'
 
-describe('See if the tests are running', function() {
-  it('should return true', function() {
-    expect(true).to.equal(true);
-  });
-  it('should import data', () => {
-    console.log(customers)
-    console.log(bookings)
-    console.log(rooms)
-  })
-});
+// describe('See if the tests are running', function() {
+//   it('should return true', function() {
+//     expect(true).to.equal(true);
+//   });
+//   it('should import data', () => {
+//     console.log(customers)
+//     console.log(bookings)
+//     console.log(rooms)
+//   })
+// });
