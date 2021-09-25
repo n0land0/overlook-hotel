@@ -1,10 +1,15 @@
 // selectors
+const greeting = document.getElementById("greeting");
 const viewBookings = document.getElementById("view-bookings");
 const totalSpent = document.getElementById("total-spent");
 const containerBookingCards = document.getElementById("container-booking-cards");
 
 // methods
 const domUpdates = {
+  renderUser(currentCustomer) {
+    greeting.innerText = `Welcome, ${currentCustomer.name}!`;
+  },
+
   renderBookings(currentCustomer, roomsArr) {
     currentCustomer.bookings.forEach(bookingObj => {
       bookingObj.getRoomType(roomsArr);
