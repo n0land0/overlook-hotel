@@ -51,11 +51,23 @@ describe('Hotel', () => {
     assert.deepEqual(hotel.rooms[0], rooms[0]);
   });
 
-  it.skip('', () => {});
+  it('should convert customer data to Customer class', () => {
+    hotel.instantiateAll();
 
-  it.skip('', () => {});
+    assert.instanceOf(hotel.customers[0], Customer);
+  });
 
-  it.skip('', () => {});
+  it('should convert booking data to Booking class', () => {
+    hotel.instantiateAll();
+
+    assert.instanceOf(hotel.bookings[0], Booking);
+  });
+
+  it('should convert room data to Room class', () => {
+    hotel.instantiateAll();
+
+    assert.instanceOf(hotel.rooms[0], Room);
+  });
 
     // assert.property();
     // assert.equal();
