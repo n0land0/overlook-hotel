@@ -65,3 +65,7 @@ const storeFetchedData = (responseArray) => {
 // addBooking(1, "2020/01/01", 1)
 //
 // removeBooking(1632451293145)
+
+const checkData = dataSet => {
+  return !Object.keys(dataSet).length || Object.values(dataSet).includes(undefined);
+}
