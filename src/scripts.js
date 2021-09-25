@@ -1,6 +1,8 @@
 // imports
 import '../assets/Maud-4-1.png';
 
+import dayjs from "dayjs";
+
 import "./css/base.scss";
 import {
   getAll,
