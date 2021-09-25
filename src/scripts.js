@@ -1,4 +1,8 @@
 // imports
+import '../assets/Maud-4-1.png';
+
+import dayjs from "dayjs";
+
 import "./css/base.scss";
 import {
   getAll,
@@ -6,6 +10,7 @@ import {
   addBooking,
   removeBooking
 } from "./apiCalls"
+import domUpdates from "./domUpdates";
 
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
@@ -43,12 +48,16 @@ const storeFetchedData = (responseArray) => {
   hotel.instantiateAll();
   currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
 
+  console.log(hotel)
+
+  console.log("Hotel rooms: ", hotel.rooms[0])
   console.log(currentCustomer);
   currentCustomer.populateBookings(hotel.bookings)
   console.log("Populate single customer bookings: ", currentCustomer.bookings)
   console.log("Calculate single customer spending: ", currentCustomer.calculateTotalSpent(hotel.rooms))
   console.log("Calculate single booking cost: ", hotel.bookings[1].calculateTotalCost(hotel.rooms))
-  console.log("Populate room unavailability: ". hotel.rooms[0].populateUnavailableDates(hotel.bookings))
+  hotel.rooms[0].populateUnavailableDates(hotel.bookings)
+  console.log("Populate room unavailability: ", hotel.rooms[0].unavailableDates);
 
   // console.log(hotel)
   // console.log(currentCustomer)
@@ -64,7 +73,8 @@ const storeFetchedData = (responseArray) => {
   // console.log(bookings[1])
   // console.log(rooms[0])
 
-  console.log(hotel)
+  domUpdates.renderUser(currentCustomer);
+  domUpdates.renderBookings(currentCustomer, rooms);
 }
 
 // getAll("customers")

@@ -5,6 +5,7 @@ class Booking {
     this.date = bookingObj.date;
     this.roomNumber = bookingObj.roomNumber;
     this.roomServiceCharges = bookingObj.roomServiceCharges;
+    this.roomType = "";
     this.totalCost = 0;
   }
   calculateTotalCost(roomsArr) {
@@ -25,6 +26,11 @@ class Booking {
       this.totalCost += charge;
     });
     return this.totalCost;
+  }
+  getRoomType(roomsArr) {
+    this.roomType = roomsArr.find(room =>
+      room.number === this.roomNumber
+    ).roomType;
   }
 }
 

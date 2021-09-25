@@ -1,16 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>The Hotel for Dogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
+  <header>
+    <h1 class="page-title">the hötel för dögs.</h1>
+  </header>
+  <nav>
+    <h2 id="greeting" class="greeting">Welcome, Hingle McCringleberry!</h2>
+  </nav>
+  <main>
+    <section class="container-book-now-and-view-bookings">
+      <section class="book-now">
+        <article class="date-range-select">
+          <label for="start-date">select trip stärt
+              <input type="date" id="start-date" min="2021-09-28" value="2021-09-28">
+          </label>
+          <label for="end-date">select trip ënd
+            <input type="date" id="end-date" min="2021-09-29" value= "2021-09-29">
+          </label>
+        </article>
+      </section>
 
+      <section id="view-bookings" class="view-bookings">
+        <section id="container-booking-header" class="container-booking-header">
+          <h2>My Bookings</h2>
+          <h2>Total Spent to Date: <span id="total-spent">$0</span></h2>
+        </section>
+        <section id="container-booking-cards" class="container-booking-cards">
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+  </footer>
+
+  <script src="bundle.js"></script>
 </body>
 </html>

@@ -52,7 +52,15 @@ describe('Booking', () => {
     assert.equal(booking.totalCost, rooms[6].costPerNight + 5);
   });
 
-  it.skip('', () => {});
+  it('should start without room type information, which is not provided by the API', () => {
+    assert.equal(booking.roomType, "");
+  });
+
+  it('should be able to retrieve the room type of the booked room', () => {
+    booking.getRoomType(rooms);
+
+    assert.equal(booking.roomType, rooms[6].roomType);
+  });
 
   it.skip('', () => {});
 
