@@ -5,8 +5,10 @@ const greeting = document.getElementById("greeting");
 const viewBookings = document.getElementById("view-bookings");
 const totalSpent = document.getElementById("total-spent");
 const containerBookingCards = document.getElementById("container-booking-cards");
+const dateRangeSelect = document.getElementById("date-range-select");
 const startDate = document.getElementById("start-date");
 const endDate = document.getElementById("end-date");
+const showRooms = document.getElementById("show-rooms");
 
 // methods
 const domUpdates = {
@@ -23,18 +25,18 @@ const domUpdates = {
           <p>${bookingObj.id}</p>
           <p>${bookingObj.roomType}</p>
           <p>${bookingObj.roomNumber}</p>
-          <p>${bookingObj.totalCost}</p>
+          <p>${bookingObj.totalCost.toFixed(2)}</p>
         </article>
       `
     })
-    totalSpent.innerText = `$${currentCustomer.totalSpent}`;
+    totalSpent.innerText = `$${currentCustomer.totalSpent.toFixed(2)}`;
   },
 
   renderMinimumDates() {
-    startDate.value = dayjs().format("YYYY-MM-DD");
-    startDate.min = dayjs().format("YYYY-MM-DD");
-    endDate.value = dayjs().add(1, "day").format("YYYY-MM-DD");
-    endDate.min = dayjs().add(1, "day").format("YYYY-MM-DD");
+    startDate.value = dayjs().subtract(1, "year").subtract(8, "month").format("YYYY-MM-DD");
+    startDate.min = dayjs().subtract(1, "year").subtract(8, "month").format("YYYY-MM-DD");
+    endDate.value = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
+    endDate.min = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
   },
 
   show(element) {
@@ -53,7 +55,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms
 };
 
 export default domUpdates;
