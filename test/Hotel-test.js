@@ -69,6 +69,16 @@ describe('Hotel', () => {
     assert.instanceOf(hotel.rooms[0], Room);
   });
 
+  it('should be able to list available rooms for a certain date', () => {
+    hotel.instantiateAll();
+    hotel.populateAvailableRooms("2020/02/16");
+
+
+    assert.equal(hotel.rooms[6].roomType, "single room");
+    assert.includeDeepMembers(hotel.availableRooms["single room"], [hotel.rooms[2], hotel.rooms[3], hotel.rooms[4]]);
+    assert.notIncludeDeepMembers(hotel.availableRooms["single room"], [hotel.rooms[6]]);
+  });
+
     // assert.property();
     // assert.equal();
     // assert.deepEqual();
