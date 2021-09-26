@@ -19,14 +19,17 @@
   <main>
     <section class="container-book-now-and-view-bookings">
       <section class="book-now">
-        <article class="date-range-select">
+        <!-- <article class="date-range-select"> -->
+        <form id="date-range-select" class="date-range-select">
           <label id="start-label" for="start-date">select trip stärt
               <input type="date" id="start-date" min="" value="">
           </label>
           <label for="end-date">select trip ënd
             <input type="date" id="end-date" min="" value= "">
           </label>
-        </article>
+          <input type="submit" id="button-show-rooms" value="show available rooms">
+        <!-- </article> -->
+      </form>
       </section>
 
       <section id="view-bookings" class="view-bookings">
