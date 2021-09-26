@@ -83,20 +83,28 @@ label {
 
 .date-range-select {
   @include flex-column-center();
-  height: 10rem;
+  height: 14rem;
   margin: 5rem;
   padding: 1.5rem 2rem 1.5rem 2rem;
 }
 
-input[type="date"] {
-  padding: 1rem;
-  margin: .5rem 0;
-  border: none;
-  font-size: 1rem;
-  font-family: $main-font;
+input[type="date"],
+input[type="submit"] {
+  // padding: 1rem;
+  // margin: .5rem 0;
+  // border: none;
+  // font-size: 1rem;
+  // font-family: $main-font;
+  @include input-styling();
+  @include card-corners();
 }
 
-::-webkit-calendar-picker-indicator {
+input[type="submit"] {
+  background-color: gray;
+}
+
+::-webkit-calendar-picker-indicator,
+input[type="submit"] {
   cursor: pointer;
 }
 
