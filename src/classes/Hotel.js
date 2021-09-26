@@ -2,6 +2,8 @@ import Customer from "./Customer";
 import Booking from "./Booking";
 import Room from "./Room";
 
+import dayjs from "dayjs";
+
 class Hotel {
   constructor(customers, bookings, rooms) {
     this.customers = customers; //just customer ids?
@@ -17,27 +19,34 @@ class Hotel {
     this.rooms = this.rooms.map(roomObj => new Room(roomObj));
   }
 
-  populateAvailableRooms(date) {
-    // this.rooms.forEach(roomObj => {
-    //   roomObj.populateUnavailableDates(this.bookings);
-    //   if (!roomObj.unavailableDates.includes(date)) {
-    //     // would I want to just keep track of dates? 🤔
-    //     this.availableRooms.push(roomObj);
-    //   }
-    // })
+  populateAvailableRooms(dates) {
     this.rooms.forEach(roomObj => {
       roomObj.populateUnavailableDates(this.bookings);
       if (!this.availableRooms[roomObj.roomType]) {
         this.availableRooms[roomObj.roomType] = [];
       }
-      if (!roomObj.unavailableDates.includes(date)) {
-        // would I want to just keep track of dates? 🤔
+      if (!this.availableRooms[roomObj.roomType].some(availRoom => availRoom.number === roomObj.number)) {
         this.availableRooms[roomObj.roomType].push(roomObj);
       }
+      dates.forEach(date => {
+        if (roomObj.unavailableDates.includes(date)) {
+          this.availableRooms[roomObj.roomType].splice(this.availableRooms[roomObj.roomType].indexOf(roomObj), 1)
+        }
+      })
+    });
+    Object.keys(this.availableRooms).forEach(roomType => {
+      this.availableRooms[roomType].sort((roomA, roomB) => roomA.number - roomB.number);
     })
   }
 
-  // filter by roomType
+  generateDateRange(date1, date2) {
+    let datesToFill = dayjs(date2).diff(date1, "day");
+    let datesBooked = Array(datesToFill).fill().map((_, index) => dayjs(date1).add(index, 'day').format("YYYY/MM/DD"));
+    return datesBooked;
+    // datesToFill.
+    // dayjs(date1).add(1, 'day')
+
+  }
 
 }
 
