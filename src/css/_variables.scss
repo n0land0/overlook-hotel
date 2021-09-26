@@ -1,6 +1,8 @@
-$landing-background: url('../../assets/Maud-4-1.png');
+// $landing-background: url('../../assets/Maud-4-1.png');
+$landing-background: url("../../assets/Dog-KD0C4465a.png");
 $main-font: 'Gemunu Libre', sans-serif;
-$elements-bkgd-color: rgba(186, 168, 152, 0.4);
+$elements-bkgd-color: rgba(186, 168, 152, 0.6);
 $card-corners: .25rem;
 $gradient-header: linear-gradient(0deg, $elements-bkgd-color 63%, rgba(255, 255, 255, 0) 100%);
 $gradient-nav: linear-gradient(180deg, $elements-bkgd-color 63%, rgba(255, 255, 255, 0) 100%);
+$transition-button: all 0.2s ease-in-out;

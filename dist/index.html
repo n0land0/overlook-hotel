@@ -11,32 +11,41 @@
 </head>
 <body>
   <header>
-    <h1 class="page-title">the hötel för dögs.</h1>
+    <h1 class="page-title">the hötel for dögs.</h1>
   </header>
   <nav>
     <h2 id="greeting" class="greeting">Welcome, Hingle McCringleberry!</h2>
   </nav>
   <main>
-    <section class="container-book-now-and-view-bookings">
-      <section class="book-now">
-        <article class="date-range-select">
-          <label for="start-date">select trip stärt
-              <input type="date" id="start-date" min="2021-09-28" value="2021-09-28">
-          </label>
-          <label for="end-date">select trip ënd
-            <input type="date" id="end-date" min="2021-09-29" value= "2021-09-29">
-          </label>
-        </article>
+    <section id="dashboard-view" class="dashboard-view">
+      <h3 class="header-booking">stay with us</h3>
+      <section class="container-book-now-and-view-bookings">
+        <section class="book-now">
+          <!-- <article class="date-range-select"> -->
+          <form id="date-range-select" class="date-range-select">
+            <label id="start-label" for="start-date">select trip stärt
+                <input type="date" id="start-date" min="" value="">
+            </label>
+            <label for="end-date">select trip ënd
+              <input type="date" id="end-date" min="" value= "">
+            </label>
+            <input type="submit" id="button-show-rooms" value="show available rooms">
+          <!-- </article> -->
+          </form>
+        </section>
+        <section id="view-bookings" class="view-bookings">
+          <section id="container-booking-header" class="container-booking-header">
+            <h2>My Bookings</h2>
+            <h2>Total Spent to Date: <span id="total-spent">$0</span></h2>
+          </section>
+          <section id="container-booking-cards" class="container-booking-cards">
+          </section>
+        </section>
       </section>
+    </section>
 
-      <section id="view-bookings" class="view-bookings">
-        <section id="container-booking-header" class="container-booking-header">
-          <h2>My Bookings</h2>
-          <h2>Total Spent to Date: <span id="total-spent">$0</span></h2>
-        </section>
-        <section id="container-booking-cards" class="container-booking-cards">
-        </section>
-      </section>
+    <section id="room-select-view" class="room-select-view hidden">
+      <section id="container-room-cards" class="container-room-cards"></section>
     </section>
   </main>
 

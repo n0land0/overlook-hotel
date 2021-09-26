@@ -1,5 +1,11 @@
 // imports
-import '../assets/Maud-4-1.png';
+import '../assets/Dog-KD0C4465a.png';
+import '../assets/single room.png';
+import '../assets/junior suite.png';
+import '../assets/suite.png';
+import '../assets/residential suite.png';
+
+
 
 import dayjs from "dayjs";
 
@@ -11,6 +17,7 @@ import {
   removeBooking
 } from "./apiCalls"
 import domUpdates from "./domUpdates";
+const {greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards} = domUpdates;
 
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
@@ -33,6 +40,18 @@ window.addEventListener("load", () => {
     getAll("rooms")
   ])
   .then(responseArray => storeFetchedData(responseArray))
+})
+
+dateRangeSelect.addEventListener("submit", () => {
+  event.preventDefault();
+  hotel.populateAvailableRooms(
+    hotel.generateDateRange(
+      dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+    )
+  );
+  console.log(hotel.availableRooms);
+  // iterate thru object keys to display room cards
+  domUpdates.renderRoomCards(hotel);
 })
 
 const storeFetchedData = (responseArray) => {
@@ -59,6 +78,9 @@ const storeFetchedData = (responseArray) => {
   hotel.rooms[0].populateUnavailableDates(hotel.bookings)
   console.log("Populate room unavailability: ", hotel.rooms[0].unavailableDates);
 
+  hotel.populateAvailableRooms(["2020/02/14", "2020/02/16"])
+  // console.log(hotel.availableRooms)
+  // console.log(hotel.makeRange("2020/02/14", "2020/02/16"))
   // console.log(hotel)
   // console.log(currentCustomer)
   // console.log(customers)
@@ -75,6 +97,7 @@ const storeFetchedData = (responseArray) => {
 
   domUpdates.renderUser(currentCustomer);
   domUpdates.renderBookings(currentCustomer, rooms);
+  domUpdates.renderMinimumDates();
 }
 
 // getAll("customers")

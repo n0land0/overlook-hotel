@@ -25,3 +25,11 @@
 @mixin card-corners() {
   border-radius: $card-corners;
 }
+
+@mixin input-styling() {
+  padding: 1rem;
+  margin: .5rem 0;
+  border: none;
+  font-size: 1rem;
+  font-family: $main-font;
+}
