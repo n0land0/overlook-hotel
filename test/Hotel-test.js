@@ -74,8 +74,9 @@ describe('Hotel', () => {
     hotel.populateAvailableRooms("2020/02/16");
 
 
-    assert.includeDeepMembers(hotel.availableRooms, hotel.rooms.filter((room, index) => index < 6));
-    assert.notIncludeDeepMembers(hotel.availableRooms, [hotel.rooms[6]]);
+    assert.equal(hotel.rooms[6].roomType, "single room");
+    assert.includeDeepMembers(hotel.availableRooms["single room"], [hotel.rooms[2], hotel.rooms[3], hotel.rooms[4]]);
+    assert.notIncludeDeepMembers(hotel.availableRooms["single room"], [hotel.rooms[6]]);
   });
 
     // assert.property();
