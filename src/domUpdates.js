@@ -48,13 +48,15 @@ const domUpdates = {
     endDate.min = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
   },
 
-  renderRoomCards(hotel) {
+  renderRoomCards(hotel, roomTypes = Object.keys(hotel.availableRooms)) {
     this.hide(dashboardView);
     this.show(roomSelectView);
-    Object.values(hotel.availableRooms).forEach(array => {
-      if (array.length) {
-        array.forEach(roomObj => {
-          // roomObj.populateImage();
+    // Object.values(hotel.availableRooms).forEach(array => {
+    roomTypes.forEach(key => {
+      if (hotel.availableRooms[key].length) {
+        hotel.availableRooms[key].forEach(roomObj => {
+          console.log("døg")
+          // array.forEach(roomObj => {
           containerRoomCards.innerHTML += `
             <article class="room-card">
               <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
