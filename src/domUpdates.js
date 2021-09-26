@@ -33,8 +33,8 @@ const domUpdates = {
   renderMinimumDates() {
     startDate.value = dayjs().format("YYYY-MM-DD");
     startDate.min = dayjs().format("YYYY-MM-DD");
-    endDate.value = dayjs().format("YYYY-MM-DD");
-    endDate.min = dayjs().format("YYYY-MM-DD");
+    endDate.value = dayjs().add(1, "day").format("YYYY-MM-DD");
+    endDate.min = dayjs().add(1, "day").format("YYYY-MM-DD");
   },
 
   show(element) {
