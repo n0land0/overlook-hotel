@@ -1,5 +1,11 @@
 // imports
-import '../assets/Maud-4-1.png';
+import '../assets/Dog-KD0C4465a.png';
+import '../assets/single room.png';
+import '../assets/junior suite.png';
+import '../assets/suite.png';
+import '../assets/residential suite.png';
+
+
 
 import dayjs from "dayjs";
 
@@ -11,7 +17,7 @@ import {
   removeBooking
 } from "./apiCalls"
 import domUpdates from "./domUpdates";
-const {greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect} = domUpdates;
+const {greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards} = domUpdates;
 
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
@@ -45,6 +51,7 @@ dateRangeSelect.addEventListener("submit", () => {
   );
   console.log(hotel.availableRooms);
   // iterate thru object keys to display room cards
+  domUpdates.renderRoomCards(hotel);
 })
 
 const storeFetchedData = (responseArray) => {
