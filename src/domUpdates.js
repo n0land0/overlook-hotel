@@ -1,8 +1,12 @@
+import dayjs from "dayjs";
+
 // selectors
 const greeting = document.getElementById("greeting");
 const viewBookings = document.getElementById("view-bookings");
 const totalSpent = document.getElementById("total-spent");
 const containerBookingCards = document.getElementById("container-booking-cards");
+const startDate = document.getElementById("start-date");
+const endDate = document.getElementById("end-date");
 
 // methods
 const domUpdates = {
@@ -26,6 +30,13 @@ const domUpdates = {
     totalSpent.innerText = `$${currentCustomer.totalSpent}`;
   },
 
+  renderMinimumDates() {
+    startDate.value = dayjs().format("YYYY-MM-DD");
+    startDate.min = dayjs().format("YYYY-MM-DD");
+    endDate.value = dayjs().format("YYYY-MM-DD");
+    endDate.min = dayjs().format("YYYY-MM-DD");
+  },
+
   show(element) {
     element.classList.remove('hidden');
   },
@@ -40,7 +51,9 @@ const domUpdates = {
 
   resetClassList(element) {
     element.classList = '';
-  }
+  },
+
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate
 };
 
 export default domUpdates;

@@ -11,6 +11,7 @@ import {
   removeBooking
 } from "./apiCalls"
 import domUpdates from "./domUpdates";
+const {greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate} = domUpdates;
 
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
@@ -75,6 +76,7 @@ const storeFetchedData = (responseArray) => {
 
   domUpdates.renderUser(currentCustomer);
   domUpdates.renderBookings(currentCustomer, rooms);
+  domUpdates.renderMinimumDates();
 }
 
 // getAll("customers")
