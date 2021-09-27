@@ -20,6 +20,11 @@ const roomSelectView = document.getElementById("room-select-view");
 const containerRoomCards = document.getElementById("container-room-cards");
 const filterByRoomType = document.getElementById("filter-by-room-type");
 const roomTypeFilters = document.querySelectorAll("input[type=button]");
+const clearAllButton = document.getElementById("clear-all");
+
+const modalTitle = document.querySelector(".modal__title");
+const modalContent = document.querySelector(".modal__content");
+const bookNowButton = document.querySelector(".modal__btn");
 
 // methods
 const domUpdates = {
@@ -61,7 +66,7 @@ const domUpdates = {
           // <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
           containerRoomCards.innerHTML += `
             <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1">
-              <img src="../images/${roomObj.roomType}.png" alt="">
+              <img src="../images/${roomObj.roomType}.png" alt="" data-micromodal-trigger="modal-1">
               <p>${roomObj.number}</p>
               <p>${roomObj.costPerNight}</p>
               <p>${roomObj.roomType}</p>
@@ -90,15 +95,15 @@ const domUpdates = {
     element.classList.add('hidden');
   },
 
-  toggle(element) {
-    element.classList.toggle('hidden');
+  toggle(element, className) {
+    element.classList.toggle(className);
   },
 
   resetClassList(element) {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton
 };
 
 export default domUpdates;
