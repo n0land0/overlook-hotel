@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField
 } = domUpdates;
 
 // data classes
@@ -55,18 +55,20 @@ window.addEventListener("load", () => {
 loginForm.addEventListener("submit", () => {
   event.preventDefault();
   // adjust for invalid usernames later
-  currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
-  currentCustomer.populateBookings(hotel.bookings)
-  // console.log("Page load", currentCustomer.bookings)
-  currentCustomer.calculateTotalSpent(hotel.rooms)
-  //
-  //
-  domUpdates.renderUser(currentCustomer);
-  domUpdates.renderBookings(currentCustomer, rooms);
-  domUpdates.renderMinimumDates();
+  if (hotel.customers.find(cust => cust.username === usernameField.value).password === passwordField.value) {
+    currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
+    currentCustomer.populateBookings(hotel.bookings)
+    // console.log("Page load", currentCustomer.bookings)
+    currentCustomer.calculateTotalSpent(hotel.rooms)
+    //
+    //
+    domUpdates.renderUser(currentCustomer);
+    domUpdates.renderBookings(currentCustomer, rooms);
+    domUpdates.renderMinimumDates();
 
-  domUpdates.hide(loginForm);
-  domUpdates.show(dashboardView);
+    domUpdates.hide(loginForm);
+    domUpdates.show(dashboardView);
+  }
 })
 
 const storeFetchedData = (responseArray) => {
