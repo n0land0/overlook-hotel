@@ -29,7 +29,9 @@ Please see our demo video [here](https://www.youtube.com/watch?v=aHChq0GsRFE).
 - Fetch API
 - Webpack
 - NPM
-- (Dependencies?)
+- Micromodal
+- DayJS
+- Postman
 
 ## Wins and Challenges
 
