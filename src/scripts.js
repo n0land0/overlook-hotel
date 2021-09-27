@@ -17,7 +17,9 @@ import {
   removeBooking
 } from "./apiCalls"
 import domUpdates from "./domUpdates";
-const {greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards} = domUpdates;
+const {
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters
+} = domUpdates;
 
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
@@ -52,6 +54,32 @@ dateRangeSelect.addEventListener("submit", () => {
   console.log(hotel.availableRooms);
   // iterate thru object keys to display room cards
   domUpdates.renderRoomCards(hotel);
+  // domUpdates.renderRoomCards(hotel, ["junior suite"]);
+})
+
+filterByRoomType.addEventListener("click", () => {
+  if (event.target.type === "button") {
+    if (event.target.value !== "clear all") {
+      event.target.checked
+        ? event.target.checked = false
+        : event.target.checked = true;
+      let filterCriteria = Array.from(roomTypeFilters).filter(roomTypeButton =>
+        roomTypeButton.checked
+      ).map(roomTypeButton =>
+        roomTypeButton.value
+      )
+      filterCriteria.length
+        ? domUpdates.renderRoomCards(hotel, filterCriteria)
+        : domUpdates.renderRoomCards(hotel)
+    } else if (event.target.value === "clear all") {
+      roomTypeFilters.forEach(roomTypeButton =>
+        roomTypeButton.checked = false
+      )
+      domUpdates.renderRoomCards(hotel)
+    } else {
+      console.log("something\'s broken")
+    }
+  }
 })
 
 const storeFetchedData = (responseArray) => {
