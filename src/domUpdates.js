@@ -18,6 +18,8 @@ const endDate = document.getElementById("end-date");
 const showRooms = document.getElementById("show-rooms");
 const roomSelectView = document.getElementById("room-select-view");
 const containerRoomCards = document.getElementById("container-room-cards");
+const filterByRoomType = document.getElementById("filter-by-room-type");
+const roomTypeFilters = document.querySelectorAll("input[type=button]");
 
 // methods
 const domUpdates = {
@@ -48,13 +50,14 @@ const domUpdates = {
     endDate.min = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
   },
 
-  renderRoomCards(hotel) {
+  renderRoomCards(hotel, roomTypes = Object.keys(hotel.availableRooms)) {
     this.hide(dashboardView);
     this.show(roomSelectView);
-    Object.values(hotel.availableRooms).forEach(array => {
-      if (array.length) {
-        array.forEach(roomObj => {
-          // roomObj.populateImage();
+    // Object.values(hotel.availableRooms).forEach(array => {
+    containerRoomCards.innerHTML = "";
+    roomTypes.forEach(key => {
+      if (hotel.availableRooms[key].length) {
+        hotel.availableRooms[key].forEach(roomObj => {
           containerRoomCards.innerHTML += `
             <article class="room-card">
               <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
@@ -68,6 +71,14 @@ const domUpdates = {
         })
       }
     })
+    if (!containerRoomCards.innerHTML.length) {
+      containerRoomCards.innerHTML = `
+        <p>we're sorry, but we don't have any available rooms matching your current search.</p>
+        <p>would you like to start another search?</p>
+        <button>yes please!</button>
+        <button>no thanks.</button>
+      `;
+    }
   },
 
   show(element) {
@@ -86,7 +97,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters
 };
 
 export default domUpdates;
