@@ -68,6 +68,7 @@ filterByRoomType.addEventListener("click", () => {
       event.target.checked
         ? event.target.checked = false
         : event.target.checked = true;
+      domUpdates.toggle(event.target, "button-selected");
       let filterCriteria = Array.from(roomTypeFilters).filter(roomTypeButton =>
         roomTypeButton.checked
       ).map(roomTypeButton =>
@@ -77,13 +78,11 @@ filterByRoomType.addEventListener("click", () => {
         ? domUpdates.renderRoomCards(hotel, filterCriteria)
         : domUpdates.renderRoomCards(hotel)
     } else if (event.target.value === "clear all" &&
-      Array.from(roomTypeFilters).some(roomTypeButton =>
-        roomTypeButton.checked)
-      )
-    {
-      roomTypeFilters.forEach(roomTypeButton =>
-        roomTypeButton.checked = false
-      );
+      Array.from(roomTypeFilters).some(roomTypeButton => roomTypeButton.checked)) {
+      roomTypeFilters.forEach(roomTypeButton => {
+        roomTypeButton.checked = false;
+        roomTypeButton.classList.remove("button-selected");
+      });
       domUpdates.renderRoomCards(hotel);
     } else {
       console.log("something\'s broken");

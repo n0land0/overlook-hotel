@@ -54,12 +54,19 @@ nav {
 }
 
 main,
-.dashboard-view,
-.room-select-view {
+.dashboard-view {
+// .dashboard-view,
+// .room-select-view {
   @include flex-row-center();
   justify-content: space-between;
   width: 100%;
   // height: 100%;
+}
+
+.room-select-view {
+  @include flex-column-center();
+  // justify-content: space-between;
+  width: 100%;
 }
 
 .container-book-now-and-view-bookings {
@@ -110,13 +117,22 @@ input[type="button"] {
 }
 
 input[type="submit"],
-input[type="button"] {
+.room-type-filter-button,
+.clear-all {
   background-color: gray;
   &:hover {
     background-color: black;
     color: white;
     cursor: pointer;
     transform: scale(1.025);
+  }
+}
+
+.button-selected {
+  background-color: navy;
+  color: white;
+  &:hover {
+    background-color: teal;
   }
 }
 
@@ -182,6 +198,7 @@ input[type="button"] {
 .room-card img {
   width: 100%;
   height: 55%;
+  filter: opacity(.6);
 }
 
 .hidden {

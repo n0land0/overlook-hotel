@@ -90,8 +90,8 @@ const domUpdates = {
     element.classList.add('hidden');
   },
 
-  toggle(element) {
-    element.classList.toggle('hidden');
+  toggle(element, className) {
+    element.classList.toggle(className);
   },
 
   resetClassList(element) {
