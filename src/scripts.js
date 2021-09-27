@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton
 } = domUpdates;
 
 // data classes
@@ -38,6 +38,7 @@ let currentCustomer;
 let customers;
 let bookings;
 let rooms;
+let targetRoomNumber;
 
 // event listeners
 window.addEventListener("load", () => {
@@ -98,11 +99,36 @@ filterByRoomType.addEventListener("click", () => {
   }
 })
 
+bookNowButton.addEventListener("click", () => {
+  // async - some of this needs to be in .then()
+  hotel.generateDateRange(
+    dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+  ).forEach(date => {
+    addBooking(currentCustomer.id, date, targetRoomNumber).then(data => console.log(data))
+  })
+
+
+  // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
+  getAll("bookings").then(bookingsArray => {
+    bookings = bookingsArray;
+    hotel.updateBookings(bookings)
+
+    currentCustomer.populateBookings(hotel.bookings)
+    currentCustomer.calculateTotalSpent(hotel.rooms)
+    domUpdates.renderBookings(currentCustomer, rooms);
+
+    console.log("After POST", hotel.bookings)
+    console.log("After POST", currentCustomer.bookings)
+  })
+})
+
+
+// some of this should be in domUpdates
 containerRoomCards.addEventListener("click", () => {
   if (event.target.parentNode.classList.contains("room-card") ||
   event.target.classList.contains("room-card")) {
     // temporarily launch POST from here, then style modal after
-    let targetRoomNumber;
+    // let targetRoomNumber;
     if (event.target.parentNode.classList.contains("room-card")) {
       targetRoomNumber = parseInt(event.target.parentNode.id);
     }
@@ -110,26 +136,40 @@ containerRoomCards.addEventListener("click", () => {
       targetRoomNumber = parseInt(event.target.id);
     }
 
+    let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
+    let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
+    let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
+
+    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    modalContent.innerHTML = `
+      <img src="../images/${targetRoom.roomType}.png" alt="">
+      <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
+      <p>${bidetStatus}</p>
+    `;
+    MicroModal.show("modal-1");
+
 // async - some of this needs to be in .then()
-    hotel.generateDateRange(
-      dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
-    ).forEach(date => {
-      addBooking(currentCustomer.id, date, targetRoomNumber).then(data => console.log(data))
-    })
+    // hotel.generateDateRange(
+    //   dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+    // ).forEach(date => {
+    //   addBooking(currentCustomer.id, date, targetRoomNumber).then(data => console.log(data))
+    // })
+    //
+    //
+    // // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
+    //
+    // getAll("bookings").then(bookingsArray => {
+    //   bookings = bookingsArray;
+    //   hotel.updateBookings(bookings)
+    //
+    //   currentCustomer.populateBookings(hotel.bookings)
+    //   currentCustomer.calculateTotalSpent(hotel.rooms)
+    //   domUpdates.renderBookings(currentCustomer, rooms);
+    //
+    //   console.log("After POST", hotel.bookings)
+    //   console.log("After POST", currentCustomer.bookings)
+    // })
 
-
-    // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
-    getAll("bookings").then(bookingsArray => {
-      bookings = bookingsArray;
-      hotel.updateBookings(bookings)
-
-      currentCustomer.populateBookings(hotel.bookings)
-      currentCustomer.calculateTotalSpent(hotel.rooms)
-      domUpdates.renderBookings(currentCustomer, rooms);
-
-      console.log("After POST", hotel.bookings)
-      console.log("After POST", currentCustomer.bookings)
-    })
     // })
     // hotel.updateBookings(bookings)
     //
