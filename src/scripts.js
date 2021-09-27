@@ -41,6 +41,7 @@ let rooms;
 
 // event listeners
 window.addEventListener("load", () => {
+  MicroModal.init();
   Promise.all([
     getSingleCustomer(50),
     getAll("customers"),
@@ -90,6 +91,49 @@ filterByRoomType.addEventListener("click", () => {
   }
 })
 
+containerRoomCards.addEventListener("click", () => {
+  if (event.target.parentNode.classList.contains("room-card") ||
+  event.target.classList.contains("room-card")) {
+    // temporarily launch POST from here, then style modal after
+    let targetRoomNumber;
+    if (event.target.parentNode.classList.contains("room-card")) {
+      targetRoomNumber = parseInt(event.target.parentNode.id);
+    }
+    if (event.target.classList.contains("room-card")) {
+      targetRoomNumber = parseInt(event.target.id);
+    }
+
+// async - some of this needs to be in .then()
+    hotel.generateDateRange(
+      dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+    ).forEach(date => {
+      addBooking(currentCustomer.id, date, targetRoomNumber).then(data => console.log(data))
+    })
+
+
+    // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
+    getAll("bookings").then(bookingsArray => {
+      bookings = bookingsArray;
+      hotel.updateBookings(bookings)
+
+      currentCustomer.populateBookings(hotel.bookings)
+      currentCustomer.calculateTotalSpent(hotel.rooms)
+      domUpdates.renderBookings(currentCustomer, rooms);
+
+      console.log("After POST", hotel.bookings)
+      console.log("After POST", currentCustomer.bookings)
+    })
+    // })
+    // hotel.updateBookings(bookings)
+    //
+    // currentCustomer.populateBookings(hotel.bookings)
+    // currentCustomer.calculateTotalSpent(hotel.rooms)
+    // domUpdates.renderBookings(currentCustomer, rooms);
+    // console.log("After POST", hotel.bookings)
+    // console.log("After POST", currentCustomer.bookings)
+  }
+})
+
 const storeFetchedData = (responseArray) => {
   // do I actually need to store these, or just use them to instantiate hotel?
   customers = responseArray[1];
@@ -102,19 +146,24 @@ const storeFetchedData = (responseArray) => {
   // create customer & populate bookings so they can be rendered
   currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
   currentCustomer.populateBookings(hotel.bookings)
+  console.log("Page load", currentCustomer.bookings)
+  currentCustomer.calculateTotalSpent(hotel.rooms)
+
 
   domUpdates.renderUser(currentCustomer);
   domUpdates.renderBookings(currentCustomer, rooms);
   domUpdates.renderMinimumDates();
+
+  console.log("Page load", hotel.bookings)
 }
 
 // getAll("customers")
 // getAll("bookings")
 // getAll("rooms")
 //
-// getSingleCustomer(11)
 //
-// addBooking(1, "2020/01/01", 1)
+// console.log(addBooking(1, "2020/01/01", 1))
+// console.log(getSingleCustomer(1))
 //
 // removeBooking(1632451293145)
 
