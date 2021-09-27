@@ -132,7 +132,7 @@ input[type="submit"],
   background-color: navy;
   color: white;
   &:hover {
-    background-color: teal;
+    background-color: navy;
   }
 }
 
@@ -195,7 +195,8 @@ input[type="submit"],
   margin: 2rem;
 }
 
-.room-card img {
+.room-card img,
+.modal__content img {
   width: 100%;
   height: 55%;
   filter: opacity(.6);
@@ -203,7 +204,7 @@ input[type="submit"],
 
 .inactive {
   cursor: default;
-  filter: brightness(25%);
+  filter: brightness(50%);
   pointer-events: none;
 }
 
