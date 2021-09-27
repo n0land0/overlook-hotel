@@ -71,7 +71,7 @@ describe('Hotel', () => {
 
   it('should be able to list available rooms for a certain date', () => {
     hotel.instantiateAll();
-    hotel.populateAvailableRooms("2020/02/16");
+    hotel.populateAvailableRooms(["2020/02/16"]);
 
 
     assert.equal(hotel.rooms[6].roomType, "single room");
@@ -79,6 +79,50 @@ describe('Hotel', () => {
     assert.notIncludeDeepMembers(hotel.availableRooms["single room"], [hotel.rooms[6]]);
   });
 
+  it('should be able to list available rooms for multiple dates', () => {
+    hotel.instantiateAll();
+    hotel.populateAvailableRooms(["2020/02/16", "2020/02/14"]);
+
+    assert.equal(hotel.rooms[7].roomType, "residential suite");
+    assert.includeDeepMembers(hotel.availableRooms["residential suite"], [hotel.rooms[0]]);
+    assert.notIncludeDeepMembers(hotel.availableRooms["residential suite"], [hotel.rooms[7]]);
+  });
+
+  it('should be able to be able to retrieve an updated list of bookings after a new booking is made', () => {
+    assert.notIncludeDeepMembers(hotel.bookings, [{
+        "id": "1632770578001",
+        "userID": 50,
+        "date": "2020/01/27",
+        "roomNumber": 10,
+        "roomServiceCharges": []
+    }])
+
+    bookings.push({
+        "id": "1632770578001",
+        "userID": 50,
+        "date": "2020/01/27",
+        "roomNumber": 10,
+        "roomServiceCharges": []
+    });
+
+    hotel.updateBookings(bookings);
+
+    assert.includeDeepMembers(hotel.bookings, [{
+        "id": "1632770578001",
+        "userID": 50,
+        "date": "2020/01/27",
+        "roomNumber": 10,
+        "roomType": "",
+        "totalCost": 0,
+        "roomServiceCharges": []
+    }])
+  });
+
+  it('should be able to create a range of dates to be booked, based on trip start and end date', () => {
+    let datesBooked = hotel.generateDateRange("2020/01/27", "2020/01/30");
+
+    assert.deepEqual(datesBooked, ["2020/01/27", "2020/01/28", "2020/01/29"])
+  });
     // assert.property();
     // assert.equal();
     // assert.deepEqual();

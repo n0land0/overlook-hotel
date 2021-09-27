@@ -9,7 +9,6 @@ class Hotel {
     this.customers = customers; //just customer ids?
     this.bookings = bookings; //just booking ids?
     this.rooms = rooms; //just room #s?
-    // this.availableRooms = [];
     this.availableRooms = {};
   }
 
@@ -47,9 +46,6 @@ class Hotel {
     let datesToFill = dayjs(date2).diff(date1, "day");
     let datesBooked = Array(datesToFill).fill().map((_, index) => dayjs(date1).add(index, 'day').format("YYYY/MM/DD"));
     return datesBooked;
-    // datesToFill.
-    // dayjs(date1).add(1, 'day')
-
   }
 
 }
