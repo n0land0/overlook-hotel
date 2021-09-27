@@ -26,6 +26,9 @@ const modalTitle = document.querySelector(".modal__title");
 const modalContent = document.querySelector(".modal__content");
 const bookNowButton = document.querySelector(".modal__btn");
 
+const loginForm = document.getElementById("login-form");
+const usernameField = document.getElementById("username-field");
+
 // methods
 const domUpdates = {
   renderUser(currentCustomer) {
@@ -103,7 +106,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField
 };
 
 export default domUpdates;
