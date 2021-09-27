@@ -30,6 +30,7 @@
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
   },
   "dependencies": {
-    "dayjs": "^1.10.7"
+    "dayjs": "^1.10.7",
+    "micromodal": "^0.4.6"
   }
 }
