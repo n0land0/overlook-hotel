@@ -20,6 +20,7 @@ const roomSelectView = document.getElementById("room-select-view");
 const containerRoomCards = document.getElementById("container-room-cards");
 const filterByRoomType = document.getElementById("filter-by-room-type");
 const roomTypeFilters = document.querySelectorAll("input[type=button]");
+const clearAllButton = document.getElementById("clear-all");
 
 // methods
 const domUpdates = {
@@ -98,7 +99,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton
 };
 
 export default domUpdates;

@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton
 } = domUpdates;
 
 // data classes
@@ -63,29 +63,37 @@ dateRangeSelect.addEventListener("submit", () => {
 })
 
 filterByRoomType.addEventListener("click", () => {
+  // move some of this to domUpdates
+     // domUpdates.inactivate(btn) fxn?
   if (event.target.type === "button") {
     if (event.target.value !== "clear all") {
+
       event.target.checked
         ? event.target.checked = false
         : event.target.checked = true;
+
       domUpdates.toggle(event.target, "button-selected");
+
       let filterCriteria = Array.from(roomTypeFilters).filter(roomTypeButton =>
         roomTypeButton.checked
       ).map(roomTypeButton =>
         roomTypeButton.value
       );
+
       filterCriteria.length
-        ? domUpdates.renderRoomCards(hotel, filterCriteria)
-        : domUpdates.renderRoomCards(hotel)
+        ? (domUpdates.renderRoomCards(hotel, filterCriteria), clearAllButton.classList.remove("inactive"))
+        : (domUpdates.renderRoomCards(hotel), clearAllButton.classList.add("inactive"))
+
     } else if (event.target.value === "clear all" &&
       Array.from(roomTypeFilters).some(roomTypeButton => roomTypeButton.checked)) {
+
       roomTypeFilters.forEach(roomTypeButton => {
         roomTypeButton.checked = false;
         roomTypeButton.classList.remove("button-selected");
       });
+
+      clearAllButton.classList.add("inactive");
       domUpdates.renderRoomCards(hotel);
-    } else {
-      console.log("something\'s broken");
     }
   }
 })

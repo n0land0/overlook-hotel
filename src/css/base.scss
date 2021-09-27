@@ -201,6 +201,12 @@ input[type="submit"],
   filter: opacity(.6);
 }
 
+.inactive {
+  cursor: default;
+  filter: brightness(25%);
+  pointer-events: none;
+}
+
 .hidden {
   display: none;
 }
