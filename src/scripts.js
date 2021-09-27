@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField
 } = domUpdates;
 
 // data classes
@@ -44,13 +44,56 @@ let targetRoomNumber;
 window.addEventListener("load", () => {
   MicroModal.init();
   Promise.all([
-    getSingleCustomer(50),
+    // getSingleCustomer(50),
     getAll("customers"),
     getAll("bookings"),
     getAll("rooms")
   ])
   .then(responseArray => storeFetchedData(responseArray))
 })
+
+loginForm.addEventListener("submit", () => {
+  event.preventDefault();
+  // adjust for invalid usernames later
+  currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
+  currentCustomer.populateBookings(hotel.bookings)
+  // console.log("Page load", currentCustomer.bookings)
+  currentCustomer.calculateTotalSpent(hotel.rooms)
+  //
+  //
+  domUpdates.renderUser(currentCustomer);
+  domUpdates.renderBookings(currentCustomer, rooms);
+  domUpdates.renderMinimumDates();
+
+  domUpdates.hide(loginForm);
+  domUpdates.show(dashboardView);
+})
+
+const storeFetchedData = (responseArray) => {
+  // do I actually need to store these, or just use them to instantiate hotel?
+  customers = responseArray[0];
+  bookings = responseArray[1];
+  rooms = responseArray[2];
+
+  hotel = new Hotel(customers, bookings, rooms);
+  hotel.instantiateAll();
+
+  // create customer & populate bookings so they can be rendered
+    // may have to move this to login event listener
+  // currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
+  // currentCustomer.populateBookings(hotel.bookings)
+  // console.log("Page load", currentCustomer.bookings)
+  // currentCustomer.calculateTotalSpent(hotel.rooms)
+  //
+  //
+  // domUpdates.renderUser(currentCustomer);
+  // domUpdates.renderBookings(currentCustomer, rooms);
+  // domUpdates.renderMinimumDates();
+  //
+  // console.log("Page load", hotel.bookings)
+  //
+  // console.log(currentCustomer.username)
+}
 
 dateRangeSelect.addEventListener("submit", () => {
   event.preventDefault();
@@ -181,28 +224,30 @@ containerRoomCards.addEventListener("click", () => {
   }
 })
 
-const storeFetchedData = (responseArray) => {
-  // do I actually need to store these, or just use them to instantiate hotel?
-  customers = responseArray[1];
-  bookings = responseArray[2];
-  rooms = responseArray[3];
-
-  hotel = new Hotel(customers, bookings, rooms);
-  hotel.instantiateAll();
-
-  // create customer & populate bookings so they can be rendered
-  currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
-  currentCustomer.populateBookings(hotel.bookings)
-  console.log("Page load", currentCustomer.bookings)
-  currentCustomer.calculateTotalSpent(hotel.rooms)
-
-
-  domUpdates.renderUser(currentCustomer);
-  domUpdates.renderBookings(currentCustomer, rooms);
-  domUpdates.renderMinimumDates();
-
-  console.log("Page load", hotel.bookings)
-}
+// const storeFetchedData = (responseArray) => {
+//   // do I actually need to store these, or just use them to instantiate hotel?
+//   customers = responseArray[1];
+//   bookings = responseArray[2];
+//   rooms = responseArray[3];
+//
+//   hotel = new Hotel(customers, bookings, rooms);
+//   hotel.instantiateAll();
+//
+//   // create customer & populate bookings so they can be rendered
+//   currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
+//   currentCustomer.populateBookings(hotel.bookings)
+//   console.log("Page load", currentCustomer.bookings)
+//   currentCustomer.calculateTotalSpent(hotel.rooms)
+//
+//
+//   domUpdates.renderUser(currentCustomer);
+//   domUpdates.renderBookings(currentCustomer, rooms);
+//   domUpdates.renderMinimumDates();
+//
+//   console.log("Page load", hotel.bookings)
+//
+//   console.log(currentCustomer.username)
+// }
 
 // getAll("customers")
 // getAll("bookings")
