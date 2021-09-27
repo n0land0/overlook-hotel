@@ -28,6 +28,7 @@ const bookNowButton = document.querySelector(".modal__btn");
 
 const loginForm = document.getElementById("login-form");
 const usernameField = document.getElementById("username-field");
+const passwordField = document.getElementById("password-field");
 
 // methods
 const domUpdates = {
@@ -90,6 +91,11 @@ const domUpdates = {
     }
   },
 
+  showError(error, container) {
+    console.warn(error);
+    container.innerHTML = "WHOA SERVER DOWN BRAH"
+  },
+
   show(element) {
     element.classList.remove('hidden');
   },
@@ -106,7 +112,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField
 };
 
 export default domUpdates;

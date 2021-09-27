@@ -50,6 +50,7 @@ window.addEventListener("load", () => {
     getAll("rooms")
   ])
   .then(responseArray => storeFetchedData(responseArray))
+  .catch(error => domUpdates.showError(error, loginForm))
 })
 
 loginForm.addEventListener("submit", () => {
@@ -154,7 +155,8 @@ bookNowButton.addEventListener("click", () => {
 
 
   // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
-  getAll("bookings").then(bookingsArray => {
+  getAll("bookings")
+  .then(bookingsArray => {
     bookings = bookingsArray;
     hotel.updateBookings(bookings)
 
@@ -165,6 +167,7 @@ bookNowButton.addEventListener("click", () => {
     console.log("After POST", hotel.bookings)
     console.log("After POST", currentCustomer.bookings)
   })
+  .catch(error => domUpdates.showError(error, roomSelectView))
 })
 
 
