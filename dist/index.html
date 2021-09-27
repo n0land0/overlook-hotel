@@ -17,7 +17,15 @@
     <h2 id="greeting" class="greeting">Welcome, Hingle McCringleberry!</h2>
   </nav>
   <main>
-    <section id="dashboard-view" class="dashboard-view">
+    <section id="login-view" class="login-view">
+      <form id="login-form" class="login-form">
+        <input id="username-field" type="text" placeholder="username" required>
+        <input type="password" placeholder="password" required>
+        <input type="submit" value="go to my dashboard">
+      </form>
+    </section>
+
+    <section id="dashboard-view" class="dashboard-view hidden">
       <h3 class="header-booking">stay with us</h3>
       <section class="container-book-now-and-view-bookings">
         <section class="book-now">
