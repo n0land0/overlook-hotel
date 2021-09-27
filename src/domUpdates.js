@@ -58,9 +58,10 @@ const domUpdates = {
     roomTypes.forEach(key => {
       if (hotel.availableRooms[key].length) {
         hotel.availableRooms[key].forEach(roomObj => {
+          // <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
           containerRoomCards.innerHTML += `
-            <article class="room-card">
-              <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
+            <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1">
+              <img src="../images/${roomObj.roomType}.png" alt="">
               <p>${roomObj.number}</p>
               <p>${roomObj.costPerNight}</p>
               <p>${roomObj.roomType}</p>

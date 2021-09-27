@@ -39,6 +39,10 @@ class Hotel {
     })
   }
 
+  updateBookings(bookingsArr) {
+    this.bookings = bookingsArr.map(bookingObj => new Booking(bookingObj));
+  }
+
   generateDateRange(date1, date2) {
     let datesToFill = dayjs(date2).diff(date1, "day");
     let datesBooked = Array(datesToFill).fill().map((_, index) => dayjs(date1).add(index, 'day').format("YYYY/MM/DD"));
