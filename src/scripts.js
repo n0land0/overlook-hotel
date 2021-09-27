@@ -1,25 +1,32 @@
-// imports
+// images
 import '../assets/Dog-KD0C4465a.png';
 import '../assets/single room.png';
 import '../assets/junior suite.png';
 import '../assets/suite.png';
 import '../assets/residential suite.png';
 
+// dependencies
 import dayjs from "dayjs";
 import MicroModal from 'micromodal';
 
+// styles
 import "./css/base.scss";
+
+// data requests
 import {
   getAll,
   getSingleCustomer,
   addBooking,
   removeBooking
-} from "./apiCalls"
+} from "./apiCalls";
+
+// DOM-related functions
 import domUpdates from "./domUpdates";
 const {
   greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters
 } = domUpdates;
 
+// data classes
 import Hotel from "./classes/Hotel"
 import Customer from "./classes/Customer"
 import Booking from "./classes/Booking"
