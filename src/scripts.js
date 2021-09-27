@@ -5,9 +5,8 @@ import '../assets/junior suite.png';
 import '../assets/suite.png';
 import '../assets/residential suite.png';
 
-
-
 import dayjs from "dayjs";
+import MicroModal from 'micromodal';
 
 import "./css/base.scss";
 import {
