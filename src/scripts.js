@@ -51,9 +51,7 @@ dateRangeSelect.addEventListener("submit", () => {
     )
   );
   console.log(hotel.availableRooms);
-  // iterate thru object keys to display room cards
   domUpdates.renderRoomCards(hotel);
-  // domUpdates.renderRoomCards(hotel, ["junior suite"]);
 })
 
 filterByRoomType.addEventListener("click", () => {
@@ -86,45 +84,17 @@ filterByRoomType.addEventListener("click", () => {
 })
 
 const storeFetchedData = (responseArray) => {
-  // hotel = new Hotel(customers, bookings, rooms);
-  // currentCustomer = new Customer(responseArray[0]);
-  // customers = responseArray[1].map(customerObj => new Customer(customerObj));
+  // do I actually need to store these, or just use them to instantiate hotel?
   customers = responseArray[1];
-  // bookings = responseArray[2].map(bookingObj => new Booking(bookingObj));
   bookings = responseArray[2];
-  // rooms = responseArray[3].map(roomObj => new Room(roomObj));
   rooms = responseArray[3];
+
   hotel = new Hotel(customers, bookings, rooms);
   hotel.instantiateAll();
+
+  // create customer & populate bookings so they can be rendered
   currentCustomer = hotel.customers.find(cust => cust.id === responseArray[0].id);
-
-  console.log(hotel)
-
-  console.log("Hotel rooms: ", hotel.rooms[0])
-  console.log(currentCustomer);
   currentCustomer.populateBookings(hotel.bookings)
-  console.log("Populate single customer bookings: ", currentCustomer.bookings)
-  console.log("Calculate single customer spending: ", currentCustomer.calculateTotalSpent(hotel.rooms))
-  console.log("Calculate single booking cost: ", hotel.bookings[1].calculateTotalCost(hotel.rooms))
-  hotel.rooms[0].populateUnavailableDates(hotel.bookings)
-  console.log("Populate room unavailability: ", hotel.rooms[0].unavailableDates);
-
-  hotel.populateAvailableRooms(["2020/02/14", "2020/02/16"])
-  // console.log(hotel.availableRooms)
-  // console.log(hotel.makeRange("2020/02/14", "2020/02/16"))
-  // console.log(hotel)
-  // console.log(currentCustomer)
-  // console.log(customers)
-  // console.log(bookings)
-  // console.log(rooms)
-
-  // console.log(currentCustomer.id)
-  // console.log(currentCustomer.name)
-  // console.log(currentCustomer.bookings)
-  // console.log(currentCustomer.totalSpent)
-
-  // console.log(bookings[1])
-  // console.log(rooms[0])
 
   domUpdates.renderUser(currentCustomer);
   domUpdates.renderBookings(currentCustomer, rooms);
