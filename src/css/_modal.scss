@@ -1,13 +1,13 @@
 // Modal
-
+@import '_mixins';
 
 /**************************
   Basic Modal Styles
 **************************/
 
-.modal {
-  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
-}
+// .modal {
+//   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+// }
 
 .modal__overlay {
   position: fixed;
@@ -224,10 +224,12 @@
   margin-top: 0;
   margin-bottom: 0;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   line-height: 1.25;
-  color: #00449e;
+  color: black;
   box-sizing: border-box;
+  width: 100%;
+  text-align: center;
 }
 
 .modal__close {
@@ -239,13 +241,22 @@
   margin-bottom: 2rem;
   line-height: 1.5;
   color: rgba(0,0,0,.8);
+  text-align: center;
+  font-size: 2.25rem;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: center;
 }
 
 .modal__btn {
-  padding: 10px 15px;
-  background-color: #e6e6e6;
-  border-radius: 4px;
-  -webkit-appearance: none;
+  // padding: 10px 15px;
+  // background-color: #e6e6e6;
+  // border-radius: 4px;
+  // -webkit-appearance: none;
+  @include input-styling();
+  font-size: 2.25rem;
 }
 
 /**************************
