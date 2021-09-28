@@ -24,7 +24,8 @@ Please see our demo video [here](https://www.youtube.com/watch?v=aHChq0GsRFE).
 - HTML5
 - CSS/SCSS
 - JavaScript
-- Mocha and Chai testing frameworks
+- Mocha 
+- Chai
 - DOM API
 - Fetch API
 - Webpack
