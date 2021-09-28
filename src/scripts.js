@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 } = domUpdates;
 
 // data classes
@@ -82,6 +82,7 @@ loginForm.addEventListener("submit", () => {
     domUpdates.renderMinimumDates();
 
     domUpdates.hide(loginForm);
+    domUpdates.show(greetingContainer);
     domUpdates.show(dashboardView);
   }
 })
@@ -135,7 +136,7 @@ bookNowButton.addEventListener("click", () => {
     dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
   ).map(date =>
     addBooking(currentCustomer.id, date, targetRoomNumber)
-    .then(data => console.log("After POST", data))
+    // .then(data => console.log("After POST", data))
   ))
   .then(() => {
     getAll("bookings")
@@ -144,8 +145,8 @@ bookNowButton.addEventListener("click", () => {
       currentCustomer.populateBookings(hotel.bookings)
       currentCustomer.calculateTotalSpent(hotel.rooms)
       domUpdates.renderBookings(currentCustomer, hotel.rooms);
-      console.log("After GET", hotel.bookings)
-      console.log("After GET", currentCustomer.bookings)
+      // console.log("After GET", hotel.bookings)
+      // console.log("After GET", currentCustomer.bookings)
     })
     .catch(error => domUpdates.showError(error, roomSelectView))
   })

@@ -11,6 +11,7 @@ const invalidPassword = document.getElementById("invalid-password");
 // dashboard
 const dashboardView = document.getElementById("dashboard-view");
   // user-specific greeting
+const greetingContainer = document.getElementById("greeting-container");
 const greeting = document.getElementById("greeting");
   // date search form
 const dateRangeSelect = document.getElementById("date-range-select");
@@ -128,7 +129,7 @@ const domUpdates = {
 
   showError(error, container) {
     console.warn(error);
-    container.innerHTML = `<span class="server-error-message">WHOA SERVER DOWN BRAH</span>`;
+    container.innerHTML = `<span class="server-error-message">aw heck, our server is not being a good boi right now. aw jeez. we're really sorry. plz try reloading the page.</span>`;
   },
 
   show(element) {
@@ -147,7 +148,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 };
 
 export default domUpdates;
