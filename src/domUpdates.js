@@ -39,6 +39,8 @@ const containerRoomCards = document.getElementById("container-room-cards");
 const modalTitle = document.querySelector(".modal__title");
 const modalContent = document.querySelector(".modal__content");
 const bookNowButton = document.querySelector(".modal__btn");
+const modalFooter = document.querySelector(".modal__footer");
+const returnToDashboardButton = document.getElementById("return-to-dashboard");
 // let targetRoomNumber;
 // METHODS
 const domUpdates = {
@@ -47,6 +49,7 @@ const domUpdates = {
   },
 
   renderBookings(currentCustomer, roomsArr) {
+    containerBookingCards.innerHTML = "";
     currentCustomer.bookings.forEach(bookingObj => {
       bookingObj.getRoomType(roomsArr);
       containerBookingCards.innerHTML += `
@@ -55,7 +58,7 @@ const domUpdates = {
           <p>${bookingObj.id}</p>
           <p>${bookingObj.roomType}</p>
           <p>${bookingObj.roomNumber}</p>
-          <p>${bookingObj.totalCost.toFixed(2)}</p>
+          <p>$${bookingObj.totalCost.toFixed(2)}</p>
         </article>
       `
     })
@@ -123,19 +126,6 @@ const domUpdates = {
     clearAllButton.classList.add("inactive");
   },
 
-  // targetSelectedRoom(event) {
-  //   if (event.target.parentNode.classList.contains("room-card") ||
-  //   event.target.classList.contains("room-card")) {
-  //     if (event.target.parentNode.classList.contains("room-card")) {
-  //       targetRoomNumber = parseInt(event.target.parentNode.id);
-  //     }
-  //     if (event.target.classList.contains("room-card")) {
-  //       targetRoomNumber = parseInt(event.target.id);
-  //     }
-  //     return targetRoomNumber;
-  //   }
-  // },
-  //
   getTargetRoomDetails(hotel, targetRoomNumber) {
       let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
       let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
@@ -144,16 +134,6 @@ const domUpdates = {
       return [targetRoom, bidetStatus, bedPlural];
   },
 
-  // fillModalDetails(targetRoomDetails) {
-  //   modalTitle.innerText = `Room #${targetRoomDetails[0].number} - ${targetRoomDetails[0].roomType} - from $${targetRoomDetails[0].costPerNight.toFixed(2)}/night`
-  //   modalContent.innerHTML = `
-  //     <img src="../images/${targetRoomDetails[0].roomType}.png" alt="">
-  //     <p>${targetRoomDetails[0].numBeds} ${targetRoomDetails[0].bedSize} ${targetRoomDetails[2]}</p>
-  //     <p>${targetRoomDetails[1]}</p>
-  //   `;
-  //   MicroModal.show("modal-1");
-  // },
-
   fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
     modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
     modalContent.innerHTML = `
@@ -161,7 +141,14 @@ const domUpdates = {
       <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
       <p>${bidetStatus}</p>
     `;
+    this.show(modalFooter);
     MicroModal.show("modal-1");
+  },
+
+  confirmBooking() {
+    domUpdates.hide(modalFooter);
+    modalTitle.innerText = "Thanks, your booking is confirmed!";
+    modalContent.innerHTML = `<button id="return-to-dashboard" data-micromodal-close>take me back to my dashboard</button>`;
   },
 
   toggleCheckedStatus(element) {
@@ -191,7 +178,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 };
 
 export default domUpdates;

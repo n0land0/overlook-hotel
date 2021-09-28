@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 } = domUpdates;
 
 // data classes
@@ -95,6 +95,7 @@ dateRangeSelect.addEventListener("submit", () => {
       dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
     )
   );
+
   domUpdates.renderRoomCards(hotel);
 })
 
@@ -105,7 +106,6 @@ filterByRoomType.addEventListener("click", () => {
       domUpdates.toggle(event.target, "button-selected");
       domUpdates.renderFilteredResults(hotel);
     } else if (event.target.value === "clear all" &&
-      // Array.from(roomTypeFilters).some(roomTypeButton => roomTypeButton.checked)) {
       [...roomTypeFilters].some(roomTypeButton => roomTypeButton.checked)) {
 
       domUpdates.clearFilters();
@@ -119,7 +119,7 @@ bookNowButton.addEventListener("click", () => {
     dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
   ).map(date =>
     addBooking(currentCustomer.id, date, targetRoomNumber)
-    // .then(data => console.log("After POST", data))
+    .then(data => console.log("After POST", data))
   ))
   .then(() => {
     getAll("bookings")
@@ -127,7 +127,9 @@ bookNowButton.addEventListener("click", () => {
     .then(() => {
       currentCustomer.populateBookings(hotel.bookings)
       currentCustomer.calculateTotalSpent(hotel.rooms)
+
       domUpdates.renderBookings(currentCustomer, hotel.rooms);
+      domUpdates.confirmBooking();
       // console.log("After GET", hotel.bookings)
       // console.log("After GET", currentCustomer.bookings)
     })
@@ -135,7 +137,14 @@ bookNowButton.addEventListener("click", () => {
   })
 })
 
-// some of this should be in domUpdates
+modalContent.addEventListener("click", () => {
+  if (event.target.id === "return-to-dashboard") {
+    domUpdates.show(modalFooter);
+    domUpdates.show(dashboardView);
+    domUpdates.hide(roomSelectView);
+  }
+})
+
 containerRoomCards.addEventListener("click", () => {
   if (event.target.parentNode.classList.contains("room-card") ||
   event.target.classList.contains("room-card")) {
@@ -146,10 +155,6 @@ containerRoomCards.addEventListener("click", () => {
     if (event.target.classList.contains("room-card")) {
       targetRoomNumber = parseInt(event.target.id);
     }
-
-    // let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
-    // let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
-    // let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
 
     domUpdates.fillModalDetails(domUpdates.getTargetRoomDetails(hotel, targetRoomNumber));
 
