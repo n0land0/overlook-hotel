@@ -1,11 +1,5 @@
 import dayjs from "dayjs";
 
-// import '../assets/1Carly-on-bellcart.png';
-// import '../assets/Dog-KD0C4465a.png';
-// import '../assets/Maud-4-1.png';
-// import '../assets/Pearl_Rooms-Pictures_©James-Bedford-6.png';
-// import '../assets/Roxy-2.png';
-
 // selectors
 const greeting = document.getElementById("greeting");
 const dashboardView = document.getElementById("dashboard-view");
@@ -62,12 +56,10 @@ const domUpdates = {
   renderRoomCards(hotel, roomTypes = Object.keys(hotel.availableRooms)) {
     this.hide(dashboardView);
     this.show(roomSelectView);
-    // Object.values(hotel.availableRooms).forEach(array => {
     containerRoomCards.innerHTML = "";
     roomTypes.forEach(key => {
       if (hotel.availableRooms[key].length) {
         hotel.availableRooms[key].forEach(roomObj => {
-          // <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
           containerRoomCards.innerHTML += `
             <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1">
               <img src="../images/${roomObj.roomType}.png" alt="" data-micromodal-trigger="modal-1">
@@ -89,6 +81,36 @@ const domUpdates = {
         <button>no thanks.</button>
       `;
     }
+  },
+
+  renderFilteredResults(hotel) {
+    // let filterCriteria = Array.from(roomTypeFilters).filter(roomTypeButton =>
+    let filterCriteria = [...roomTypeFilters].filter(roomTypeButton =>
+      roomTypeButton.checked
+    ).map(roomTypeButton =>
+      roomTypeButton.value
+    );
+
+    filterCriteria.length
+      ? (this.renderRoomCards(hotel, filterCriteria), clearAllButton.classList.remove("inactive"))
+      : (this.renderRoomCards(hotel), clearAllButton.classList.add("inactive"))
+  },
+
+  clearFilters() {
+    roomTypeFilters.forEach(roomTypeButton => {
+      roomTypeButton.checked = false;
+      roomTypeButton.classList.remove("button-selected");
+      console.log(roomTypeButton.classList)
+      console.log(roomTypeButton.checked)
+    });
+
+    clearAllButton.classList.add("inactive");
+  },
+
+  toggleCheckedStatus(element) {
+    element.checked
+      ? element.checked = false
+      : element.checked = true;
   },
 
   showError(error, container) {
