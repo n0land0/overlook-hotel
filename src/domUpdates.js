@@ -4,6 +4,7 @@ import MicroModal from 'micromodal';
 
 // SELECTORS
 // login
+const loginView = document.getElementById("login-view");
 const loginForm = document.getElementById("login-form");
 const usernameField = document.getElementById("username-field");
 const invalidUsername = document.getElementById("invalid-username");
@@ -186,7 +187,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword, loginView
 };
 
 export default domUpdates;

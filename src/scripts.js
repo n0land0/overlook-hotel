@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginView, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 } = domUpdates;
 
 // data classes
@@ -76,7 +76,8 @@ loginForm.addEventListener("submit", () => {
     domUpdates.renderBookings(currentCustomer, hotel.rooms);
     domUpdates.renderMinimumDates();
 
-    domUpdates.hide(loginForm);
+    // domUpdates.hide(loginForm);
+    domUpdates.hide(loginView);
     domUpdates.show(greetingContainer);
     domUpdates.show(dashboardView);
   }

@@ -2,6 +2,10 @@
 @import '_variables';
 @import '_mixins';
 @import '_modal';
+@import '_buttons';
+// @import '_dashboard';
+@import '_roomselect';
+@import '_login';
 
 ::-webkit-scrollbar {
   width: 0;
@@ -17,9 +21,6 @@ html {
 
 body {
   @include landing-background();
-  // font-family: $main-font;
-  // background-image: $landing-background;
-  // background-image: url("../images/pineapple_PNG2738.png");
 }
 
 header,
@@ -30,14 +31,12 @@ nav {
 header {
   display: flex;
   width: 100%;
-  // font-family: $main-font;
   font-size: 10rem;
   z-index: 1;
   position: fixed;
   bottom: 0;
   padding-bottom: 1rem;
   background: $gradient-header;
-    // padding-bottom: 10px;
 }
 
 nav {
@@ -63,11 +62,11 @@ main,
   // height: 100%;
 }
 
-.room-select-view {
-  @include flex-column-center();
-  // justify-content: space-between;
-  width: 100%;
-}
+// .room-select-view {
+//   @include flex-column-center();
+//   // justify-content: space-between;
+//   width: 100%;
+// }
 
 .container-book-now-and-view-bookings {
   display: flex;
@@ -108,41 +107,41 @@ label {
   padding: 1.5rem 2rem 1.5rem 2rem;
 }
 
-input[type="date"],
-input[type="submit"],
-input[type="button"] {
-  @include input-styling();
-  @include card-corners();
-  transition: $transition-button;
-}
+// input[type="date"],
+// input[type="submit"],
+// input[type="button"] {
+//   @include input-styling();
+//   @include card-corners();
+//   transition: $transition-button;
+// }
 
-input[type="submit"],
-.room-type-filter-button,
-.clear-all {
-  background-color: gray;
-  &:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    transform: scale(1.025);
-  }
-}
+// input[type="submit"],
+// .room-type-filter-button,
+// .clear-all {
+//   background-color: gray;
+//   &:hover {
+//     background-color: black;
+//     color: white;
+//     cursor: pointer;
+//     transform: scale(1.025);
+//   }
+// }
 
-.button-selected {
-  background-color: navy;
-  color: white;
-  &:hover {
-    background-color: navy;
-  }
-}
-
-::-webkit-calendar-picker-indicator {
-  transition: $transition-button;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.025);
-  }
-}
+// .button-selected {
+//   background-color: navy;
+//   color: white;
+//   &:hover {
+//     background-color: navy;
+//   }
+// }
+//
+// ::-webkit-calendar-picker-indicator {
+//   transition: $transition-button;
+//   &:hover {
+//     cursor: pointer;
+//     transform: scale(1.025);
+//   }
+// }
 
 .view-bookings {
   @include flex-column-center();
@@ -176,39 +175,43 @@ input[type="submit"],
   @include card-corners();
 }
 
-.room-select-view {
-  height: 75vh;
-}
+// .room-select-view {
+//   height: 75vh;
+// }
 
-.container-room-cards {
-  @include flex-row-center();
-  flex-wrap: wrap;
-  width: 100%;
-  height: 42rem;
-  overflow: scroll;
-}
+// .container-room-cards {
+//   @include flex-row-center();
+//   flex-wrap: wrap;
+//   width: 100%;
+//   height: 42rem;
+//   overflow: scroll;
+// }
 
-.room-card {
-  @include flex-column-center();
-  @include card-corners();
-  background-color: white;
-  width: 15rem;
-  height: 20rem;
-  margin: 2rem;
-}
+// .room-card {
+//   @include flex-column-center();
+//   @include card-corners();
+//   background-color: white;
+//   width: 15rem;
+//   height: 20rem;
+//   margin: 2rem;
+// }
+//
+// .room-card img {
+//   @include room-img();
+// }
 
-.room-card img,
-.modal__content img {
-  width: 100%;
-  height: 55%;
-  filter: opacity(.6);
-}
+// .modal__content img {
+//   @include room-img();
+//   // width: 100%;
+//   // height: 55%;
+//   // filter: opacity(.6);
+// }
 
-.inactive {
-  cursor: default;
-  filter: brightness(50%);
-  pointer-events: none;
-}
+// .inactive {
+//   cursor: default;
+//   filter: brightness(50%);
+//   pointer-events: none;
+// }
 
 .hidden {
   display: none;

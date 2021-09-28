@@ -33,3 +33,9 @@
   font-size: 1rem;
   font-family: $main-font;
 }
+
+@mixin room-img() {
+  width: 100%;
+  height: 55%;
+  filter: opacity(.6);
+}
