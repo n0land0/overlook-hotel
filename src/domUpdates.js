@@ -41,7 +41,7 @@ const modalContent = document.querySelector(".modal__content");
 const bookNowButton = document.querySelector(".modal__btn");
 const modalFooter = document.querySelector(".modal__footer");
 const returnToDashboardButton = document.getElementById("return-to-dashboard");
-// let targetRoomNumber;
+
 // METHODS
 const domUpdates = {
   renderUser(currentCustomer) {
@@ -112,7 +112,6 @@ const domUpdates = {
   },
 
   renderFilteredResults(hotel) {
-    // let filterCriteria = Array.from(roomTypeFilters).filter(roomTypeButton =>
     let filterCriteria = [...roomTypeFilters].filter(roomTypeButton =>
       roomTypeButton.checked
     ).map(roomTypeButton =>

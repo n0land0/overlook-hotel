@@ -35,11 +35,6 @@ import Room from "./classes/Room"
 // global variables
 let hotel;
 let currentCustomer;
-  // do I need these?
-let customers;
-let bookings;
-let rooms;
-
 let targetRoomNumber;
 
 // event listeners
