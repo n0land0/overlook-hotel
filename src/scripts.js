@@ -147,24 +147,19 @@ containerRoomCards.addEventListener("click", () => {
       targetRoomNumber = parseInt(event.target.id);
     }
 
-    let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
-    let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
-    let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
+    // let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
+    // let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
+    // let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
 
-    // domUpdates.fillModalDetails(domUpdates.targetSelectedRoom(event));
-    // domUpdates.fillModalDetails(
-    //   domUpdates.getTargetRoomDetails(hotel,
-    //     domUpdates.targetSelectedRoom(event)
-    //   )
-    // );
+    domUpdates.fillModalDetails(domUpdates.getTargetRoomDetails(hotel, targetRoomNumber));
 
-    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
-    modalContent.innerHTML = `
-      <img src="../images/${targetRoom.roomType}.png" alt="">
-      <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
-      <p>${bidetStatus}</p>
-    `;
-    MicroModal.show("modal-1");
+    // modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    // modalContent.innerHTML = `
+    //   <img src="../images/${targetRoom.roomType}.png" alt="">
+    //   <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
+    //   <p>${bidetStatus}</p>
+    // `;
+    // MicroModal.show("modal-1");
   }
 })
 

@@ -136,13 +136,13 @@ const domUpdates = {
   //   }
   // },
   //
-  // getTargetRoomDetails(hotel, targetRoomNumber) {
-  //     let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
-  //     let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
-  //     let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
-  //
-  //     return [targetRoom, bidetStatus, bedPlural];
-  // },
+  getTargetRoomDetails(hotel, targetRoomNumber) {
+      let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
+      let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
+      let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
+
+      return [targetRoom, bidetStatus, bedPlural];
+  },
 
   // fillModalDetails(targetRoomDetails) {
   //   modalTitle.innerText = `Room #${targetRoomDetails[0].number} - ${targetRoomDetails[0].roomType} - from $${targetRoomDetails[0].costPerNight.toFixed(2)}/night`
@@ -154,15 +154,15 @@ const domUpdates = {
   //   MicroModal.show("modal-1");
   // },
 
-  // fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
-  //   modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
-  //   modalContent.innerHTML = `
-  //     <img src="../images/${targetRoom.roomType}.png" alt="">
-  //     <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
-  //     <p>${bidetStatus}</p>
-  //   `;
-  //   MicroModal.show("modal-1");
-  // },
+  fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
+    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    modalContent.innerHTML = `
+      <img src="../images/${targetRoom.roomType}.png" alt="">
+      <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
+      <p>${bidetStatus}</p>
+    `;
+    MicroModal.show("modal-1");
+  },
 
   toggleCheckedStatus(element) {
     element.checked
