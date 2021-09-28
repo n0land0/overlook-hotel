@@ -1,30 +1,43 @@
 import dayjs from "dayjs";
 
-// selectors
-const greeting = document.getElementById("greeting");
+// SELECTORS
+// login
+const loginForm = document.getElementById("login-form");
+const usernameField = document.getElementById("username-field");
+const invalidUsername = document.getElementById("invalid-username");
+const passwordField = document.getElementById("password-field");
+const invalidPassword = document.getElementById("invalid-password");
+
+// dashboard
 const dashboardView = document.getElementById("dashboard-view");
-const viewBookings = document.getElementById("view-bookings");
-const totalSpent = document.getElementById("total-spent");
-const containerBookingCards = document.getElementById("container-booking-cards");
+  // user-specific greeting
+const greeting = document.getElementById("greeting");
+  // date search form
 const dateRangeSelect = document.getElementById("date-range-select");
 const startDate = document.getElementById("start-date");
 const endDate = document.getElementById("end-date");
 const showRooms = document.getElementById("show-rooms");
+
+// user bookings
+const viewBookings = document.getElementById("view-bookings");
+const totalSpent = document.getElementById("total-spent");
+const containerBookingCards = document.getElementById("container-booking-cards");
+
+// search results
 const roomSelectView = document.getElementById("room-select-view");
-const containerRoomCards = document.getElementById("container-room-cards");
+  // filters
 const filterByRoomType = document.getElementById("filter-by-room-type");
 const roomTypeFilters = document.querySelectorAll("input[type=button]");
 const clearAllButton = document.getElementById("clear-all");
+  // display area
+const containerRoomCards = document.getElementById("container-room-cards");
 
+// selected room rodal
 const modalTitle = document.querySelector(".modal__title");
 const modalContent = document.querySelector(".modal__content");
 const bookNowButton = document.querySelector(".modal__btn");
 
-const loginForm = document.getElementById("login-form");
-const usernameField = document.getElementById("username-field");
-const passwordField = document.getElementById("password-field");
-
-// methods
+// METHODS
 const domUpdates = {
   renderUser(currentCustomer) {
     greeting.innerText = `Welcome, ${currentCustomer.name}!`;
@@ -134,7 +147,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 };
 
 export default domUpdates;
