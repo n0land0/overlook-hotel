@@ -1,42 +1,55 @@
+// DEPENDENCIES
 import dayjs from "dayjs";
+import MicroModal from 'micromodal';
 
-// import '../assets/1Carly-on-bellcart.png';
-// import '../assets/Dog-KD0C4465a.png';
-// import '../assets/Maud-4-1.png';
-// import '../assets/Pearl_Rooms-Pictures_©James-Bedford-6.png';
-// import '../assets/Roxy-2.png';
+// SELECTORS
+// login
+const loginForm = document.getElementById("login-form");
+const usernameField = document.getElementById("username-field");
+const invalidUsername = document.getElementById("invalid-username");
+const passwordField = document.getElementById("password-field");
+const invalidPassword = document.getElementById("invalid-password");
 
-// selectors
-const greeting = document.getElementById("greeting");
+// dashboard
 const dashboardView = document.getElementById("dashboard-view");
-const viewBookings = document.getElementById("view-bookings");
-const totalSpent = document.getElementById("total-spent");
-const containerBookingCards = document.getElementById("container-booking-cards");
+  // user-specific greeting
+const greetingContainer = document.getElementById("greeting-container");
+const greeting = document.getElementById("greeting");
+  // date search form
 const dateRangeSelect = document.getElementById("date-range-select");
 const startDate = document.getElementById("start-date");
 const endDate = document.getElementById("end-date");
 const showRooms = document.getElementById("show-rooms");
+
+// user bookings
+const viewBookings = document.getElementById("view-bookings");
+const totalSpent = document.getElementById("total-spent");
+const containerBookingCards = document.getElementById("container-booking-cards");
+
+// search results
 const roomSelectView = document.getElementById("room-select-view");
-const containerRoomCards = document.getElementById("container-room-cards");
+  // filters
 const filterByRoomType = document.getElementById("filter-by-room-type");
 const roomTypeFilters = document.querySelectorAll("input[type=button]");
 const clearAllButton = document.getElementById("clear-all");
+  // display area
+const containerRoomCards = document.getElementById("container-room-cards");
 
+// selected room rodal
 const modalTitle = document.querySelector(".modal__title");
 const modalContent = document.querySelector(".modal__content");
 const bookNowButton = document.querySelector(".modal__btn");
+const modalFooter = document.querySelector(".modal__footer");
+const returnToDashboardButton = document.getElementById("return-to-dashboard");
 
-const loginForm = document.getElementById("login-form");
-const usernameField = document.getElementById("username-field");
-const passwordField = document.getElementById("password-field");
-
-// methods
+// METHODS
 const domUpdates = {
   renderUser(currentCustomer) {
     greeting.innerText = `Welcome, ${currentCustomer.name}!`;
   },
 
   renderBookings(currentCustomer, roomsArr) {
+    containerBookingCards.innerHTML = "";
     currentCustomer.bookings.forEach(bookingObj => {
       bookingObj.getRoomType(roomsArr);
       containerBookingCards.innerHTML += `
@@ -45,7 +58,7 @@ const domUpdates = {
           <p>${bookingObj.id}</p>
           <p>${bookingObj.roomType}</p>
           <p>${bookingObj.roomNumber}</p>
-          <p>${bookingObj.totalCost.toFixed(2)}</p>
+          <p>$${bookingObj.totalCost.toFixed(2)}</p>
         </article>
       `
     })
@@ -53,21 +66,28 @@ const domUpdates = {
   },
 
   renderMinimumDates() {
-    startDate.value = dayjs().subtract(1, "year").subtract(8, "month").format("YYYY-MM-DD");
     startDate.min = dayjs().subtract(1, "year").subtract(8, "month").format("YYYY-MM-DD");
-    endDate.value = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
-    endDate.min = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
+    startDate.value = startDate.min;
+
+    endDate.min = dayjs(startDate.value).add(1, "day").format("YYYY-MM-DD");
+    endDate.value = endDate.min;
+  },
+
+  renderMinimumEndDate() {
+    event.preventDefault();
+    endDate.min = dayjs(startDate.value).add(1, "day").format("YYYY-MM-DD");
+    if (dayjs(startDate.value) >= dayjs(endDate.value)) {
+      endDate.value = endDate.min;
+    }
   },
 
   renderRoomCards(hotel, roomTypes = Object.keys(hotel.availableRooms)) {
     this.hide(dashboardView);
     this.show(roomSelectView);
-    // Object.values(hotel.availableRooms).forEach(array => {
     containerRoomCards.innerHTML = "";
     roomTypes.forEach(key => {
       if (hotel.availableRooms[key].length) {
         hotel.availableRooms[key].forEach(roomObj => {
-          // <img src="../images/${roomObj.roomType}.png" id="room-preview-${roomObj.number}" alt="">
           containerRoomCards.innerHTML += `
             <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1">
               <img src="../images/${roomObj.roomType}.png" alt="" data-micromodal-trigger="modal-1">
@@ -91,9 +111,63 @@ const domUpdates = {
     }
   },
 
+  renderFilteredResults(hotel) {
+    let filterCriteria = [...roomTypeFilters].filter(roomTypeButton =>
+      roomTypeButton.checked
+    ).map(roomTypeButton =>
+      roomTypeButton.value
+    );
+
+    filterCriteria.length
+      ? (this.renderRoomCards(hotel, filterCriteria), clearAllButton.classList.remove("inactive"))
+      : (this.renderRoomCards(hotel), clearAllButton.classList.add("inactive"))
+  },
+
+  clearFilters() {
+    roomTypeFilters.forEach(roomTypeButton => {
+      roomTypeButton.checked = false;
+      roomTypeButton.classList.remove("button-selected");
+      console.log(roomTypeButton.classList)
+      console.log(roomTypeButton.checked)
+    });
+
+    clearAllButton.classList.add("inactive");
+  },
+
+  getTargetRoomDetails(hotel, targetRoomNumber) {
+      let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
+      let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
+      let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
+
+      return [targetRoom, bidetStatus, bedPlural];
+  },
+
+  fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
+    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    modalContent.innerHTML = `
+      <img src="../images/${targetRoom.roomType}.png" alt="">
+      <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
+      <p>${bidetStatus}</p>
+    `;
+    this.show(modalFooter);
+    MicroModal.show("modal-1");
+  },
+
+  confirmBooking() {
+    domUpdates.hide(modalFooter);
+    modalTitle.innerText = "Thanks, your booking is confirmed!";
+    modalContent.innerHTML = `<button id="return-to-dashboard" data-micromodal-close>take me back to my dashboard</button>`;
+  },
+
+  toggleCheckedStatus(element) {
+    element.checked
+      ? element.checked = false
+      : element.checked = true;
+  },
+
   showError(error, container) {
     console.warn(error);
-    container.innerHTML = `<span class="server-error-message">WHOA SERVER DOWN BRAH</span>`;
+    container.innerHTML = `<span class="server-error-message">aw heck, our server is not being a good boi right now. aw jeez. we're really sorry. plz try reloading the page.</span>`;
   },
 
   show(element) {
@@ -112,7 +186,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField
+  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 };
 
 export default domUpdates;

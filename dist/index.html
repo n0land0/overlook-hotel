@@ -13,7 +13,7 @@
   <header>
     <h1 class="page-title">the hötel for dögs.</h1>
   </header>
-  <nav>
+  <nav id="greeting-container" class="hidden">
     <h2 id="greeting" class="greeting">Welcome, Hingle McCringleberry!</h2>
   </nav>
   <main>
@@ -22,9 +22,11 @@
         <label for="username-field">username
           <input id="username-field" type="text" placeholder="username" required>
         </label>
+        <p id="invalid-username" class="hidden">invalid username</p>
         <label for="password-field">password
           <input id="password-field" type="password" placeholder="password" required>
         </label>
+        <p id="invalid-password" class="hidden">invalid password</p>
         <input type="submit" value="go to my dashboard">
       </form>
     </section>
@@ -87,7 +89,8 @@
             Modal content
           </div>
           <footer class="modal__footer">
-            <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">book now</button>
+            <!-- <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">book now</button> -->
+            <button class="modal__btn" aria-label="book this room">book now</button>
           </footer>
         </div>
       </div>
