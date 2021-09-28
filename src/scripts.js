@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField
+  greeting, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
 } = domUpdates;
 
 // data classes
@@ -35,9 +35,11 @@ import Room from "./classes/Room"
 // global variables
 let hotel;
 let currentCustomer;
+  // do I need these?
 let customers;
 let bookings;
 let rooms;
+
 let targetRoomNumber;
 
 // event listeners
@@ -53,23 +55,25 @@ window.addEventListener("load", () => {
 })
 
 const storeFetchedData = (responseArray) => {
-  // do I actually need to store these, or just use them to instantiate hotel?
-  // customers = responseArray[0];
-  // bookings = responseArray[1];
-  // rooms = responseArray[2];
-
-  // hotel = new Hotel(customers, bookings, rooms);
   hotel = new Hotel(responseArray[0], responseArray[1], responseArray[2]);
   hotel.instantiateAll();
 }
 
 loginForm.addEventListener("submit", () => {
   event.preventDefault();
+  currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
 
-  if (hotel.customers.find(cust =>
-    cust.username === usernameField.value
-  ).password === passwordField.value) {
-    currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
+  if (!currentCustomer) {
+    domUpdates.show(invalidUsername)
+    domUpdates.hide(invalidPassword)
+  }
+
+  if (currentCustomer.password !== passwordField.value) {
+    domUpdates.show(invalidPassword)
+    domUpdates.hide(invalidUsername)
+  }
+
+  if (currentCustomer.password === passwordField.value) {
     currentCustomer.populateBookings(hotel.bookings)
     currentCustomer.calculateTotalSpent(hotel.rooms)
 
@@ -95,43 +99,16 @@ dateRangeSelect.addEventListener("submit", () => {
 })
 
 filterByRoomType.addEventListener("click", () => {
-  // move some of this to domUpdates
-     // domUpdates.inactivate(btn) fxn?
   if (event.target.type === "button") {
     if (event.target.value !== "clear all") {
-
-      // event.target.checked
-      //   ? event.target.checked = false
-      //   : event.target.checked = true;
-
       domUpdates.toggleCheckedStatus(event.target);
       domUpdates.toggle(event.target, "button-selected");
       domUpdates.renderFilteredResults(hotel);
-
-      // generating selected room types to filter search
-      // let filterCriteria = Array.from(roomTypeFilters).filter(roomTypeButton =>
-      //   roomTypeButton.checked
-      // ).map(roomTypeButton =>
-      //   roomTypeButton.value
-      // );
-      //
-      // filterCriteria.length
-      //   ? (domUpdates.renderRoomCards(hotel, filterCriteria), clearAllButton.classList.remove("inactive"))
-      //   : (domUpdates.renderRoomCards(hotel), clearAllButton.classList.add("inactive"))
-
     } else if (event.target.value === "clear all" &&
       // Array.from(roomTypeFilters).some(roomTypeButton => roomTypeButton.checked)) {
       [...roomTypeFilters].some(roomTypeButton => roomTypeButton.checked)) {
 
-      // roomTypeFilters.forEach(roomTypeButton => {
-      //   roomTypeButton.checked = false;
-      //   roomTypeButton.classList.remove("button-selected");
-      // });
-      //
-      // clearAllButton.classList.add("inactive");
-
       domUpdates.clearFilters();
-
       domUpdates.renderRoomCards(hotel);
     }
   }
@@ -152,37 +129,26 @@ filterByRoomType.addEventListener("click", () => {
 // }
 
 bookNowButton.addEventListener("click", () => {
-  // async - some of this needs to be in .then()
-  // Promise.all?
-  Promise.all(
-    hotel.generateDateRange(
-      dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
-      // map instead
-    // ).forEach(date => {
-    ).map(date => {
-      addBooking(currentCustomer.id, date, targetRoomNumber)
-      .then(data => console.log(data))
-      // addBooking(currentCustomer.id, date, targetRoomNumber)
+  // let datesBooked = hotel.generateDateRange(dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD"))
+
+  Promise.all(hotel.generateDateRange(
+    dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+  ).map(date =>
+    addBooking(currentCustomer.id, date, targetRoomNumber)
+    .then(data => console.log("After POST", data))
+  ))
+  .then(() => {
+    getAll("bookings")
+    .then(bookingsArray => hotel.updateBookings(bookingsArray))
+    .then(() => {
+      currentCustomer.populateBookings(hotel.bookings)
+      currentCustomer.calculateTotalSpent(hotel.rooms)
+      domUpdates.renderBookings(currentCustomer, hotel.rooms);
+      console.log("After GET", hotel.bookings)
+      console.log("After GET", currentCustomer.bookings)
     })
-  )
-  // .then(data => console.log(data))
-// .then here
-
-  // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
-  getAll("bookings")
-  .then(bookingsArray => {
-    bookings = bookingsArray;
-    hotel.updateBookings(bookings)
-
-    currentCustomer.populateBookings(hotel.bookings)
-    currentCustomer.calculateTotalSpent(hotel.rooms)
-    // domUpdates.renderBookings(currentCustomer, rooms);
-    domUpdates.renderBookings(currentCustomer, hotel.rooms);
-
-    console.log("After POST", hotel.bookings)
-    console.log("After POST", currentCustomer.bookings)
+    .catch(error => domUpdates.showError(error, roomSelectView))
   })
-  .catch(error => domUpdates.showError(error, roomSelectView))
 })
 
 // some of this should be in domUpdates
