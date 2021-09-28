@@ -99,6 +99,10 @@ dateRangeSelect.addEventListener("submit", () => {
   domUpdates.renderRoomCards(hotel);
 })
 
+startDate.addEventListener("change", () => {
+  domUpdates.renderMinimumEndDate();
+})
+
 filterByRoomType.addEventListener("click", () => {
   if (event.target.type === "button") {
     if (event.target.value !== "clear all") {
@@ -157,14 +161,6 @@ containerRoomCards.addEventListener("click", () => {
     }
 
     domUpdates.fillModalDetails(domUpdates.getTargetRoomDetails(hotel, targetRoomNumber));
-
-    // modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
-    // modalContent.innerHTML = `
-    //   <img src="../images/${targetRoom.roomType}.png" alt="">
-    //   <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
-    //   <p>${bidetStatus}</p>
-    // `;
-    // MicroModal.show("modal-1");
   }
 })
 

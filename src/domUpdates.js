@@ -66,10 +66,19 @@ const domUpdates = {
   },
 
   renderMinimumDates() {
-    startDate.value = dayjs().subtract(1, "year").subtract(8, "month").format("YYYY-MM-DD");
     startDate.min = dayjs().subtract(1, "year").subtract(8, "month").format("YYYY-MM-DD");
-    endDate.value = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
-    endDate.min = dayjs().subtract(1, "year").subtract(8, "month").add(1, "day").format("YYYY-MM-DD");
+    startDate.value = startDate.min;
+
+    endDate.min = dayjs(startDate.value).add(1, "day").format("YYYY-MM-DD");
+    endDate.value = endDate.min;
+  },
+
+  renderMinimumEndDate() {
+    event.preventDefault();
+    endDate.min = dayjs(startDate.value).add(1, "day").format("YYYY-MM-DD");
+    if (dayjs(startDate.value) >= dayjs(endDate.value)) {
+      endDate.value = endDate.min;
+    }
   },
 
   renderRoomCards(hotel, roomTypes = Object.keys(hotel.availableRooms)) {
