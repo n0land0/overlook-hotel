@@ -34,3 +34,18 @@
 .room-card img {
   @include room-img();
 }
+
+.no-results-options {
+  @include flex-row-center();
+  justify-content: space-around;
+  margin: 1rem;
+  width: 80%;
+}
+
+.no-results-msg {
+  @include flex-column-center();
+  @include card-corners();
+  background-color: $elements-bkgd-color;
+  padding: 2rem;
+  box-shadow: $card-shadow;
+}

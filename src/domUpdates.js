@@ -103,11 +103,16 @@ const domUpdates = {
       }
     })
     if (!containerRoomCards.innerHTML.length) {
+      this.hide(filterByRoomType);
       containerRoomCards.innerHTML = `
-        <p>we're sorry, but we don't have any available rooms matching your current search.</p>
-        <p>would you like to start another search?</p>
-        <button>yes please!</button>
-        <button>no thanks.</button>
+        <article class="no-results-msg">
+          <p>we're sorry, but we don't have any available rooms matching your current search.</p>
+          <p>would you like to start another search?</p>
+          <div class="no-results-options">
+            <button id="yes-please">yes please!</button>
+            <button id="no-thanks">no thanks.</button>
+          </div>
+        </article>
       `;
     }
   },

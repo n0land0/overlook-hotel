@@ -114,6 +114,19 @@ filterByRoomType.addEventListener("click", () => {
   }
 })
 
+containerRoomCards.addEventListener("click", () => {
+  if (event.target.id === "yes-please") {
+    domUpdates.show(filterByRoomType);
+    domUpdates.show(dashboardView);
+    domUpdates.hide(roomSelectView);
+  }
+  if (event.target.id === "no-thanks") {
+    domUpdates.clearFilters();
+    domUpdates.renderRoomCards(hotel);
+    domUpdates.show(filterByRoomType);
+  }
+})
+
 bookNowButton.addEventListener("click", () => {
   Promise.all(hotel.generateDateRange(
     dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
