@@ -93,7 +93,7 @@ const domUpdates = {
 
   showError(error, container) {
     console.warn(error);
-    container.innerHTML = "WHOA SERVER DOWN BRAH"
+    container.innerHTML = `<span class="server-error-message">WHOA SERVER DOWN BRAH</span>`;
   },
 
   show(element) {

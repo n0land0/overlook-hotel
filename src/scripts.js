@@ -147,12 +147,14 @@ filterByRoomType.addEventListener("click", () => {
 
 bookNowButton.addEventListener("click", () => {
   // async - some of this needs to be in .then()
+  // Promise.all?
   hotel.generateDateRange(
     dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+    // map instead
   ).forEach(date => {
     addBooking(currentCustomer.id, date, targetRoomNumber).then(data => console.log(data))
   })
-
+// .then here
 
   // getAll("bookings").then(bookingsArray => bookings = bookingsArray)
   getAll("bookings")
