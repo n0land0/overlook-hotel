@@ -157,7 +157,7 @@ const domUpdates = {
   confirmBooking() {
     domUpdates.hide(modalFooter);
     modalTitle.innerText = "Thanks, your booking is confirmed!";
-    modalContent.innerHTML = `<button id="return-to-dashboard" data-micromodal-close>take me back to my dashboard</button>`;
+    modalContent.innerHTML = `<button id="return-to-dashboard" class="return-to-dashboard" data-micromodal-close>take me back to my dashboard</button>`;
   },
 
   toggleCheckedStatus(element) {

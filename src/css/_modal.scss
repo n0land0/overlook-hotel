@@ -248,6 +248,8 @@
 
 .modal__content img {
   @include room-img();
+  @include card-corners();
+  box-shadow: $card-shadow;
 }
 
 .modal__footer {
@@ -261,7 +263,15 @@
   // border-radius: 4px;
   // -webkit-appearance: none;
   @include input-styling();
+  @include card-corners();
+  transition: $transition-button;
   font-size: 2.25rem;
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.025);
+  }
 }
 
 /**************************

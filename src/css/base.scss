@@ -82,7 +82,7 @@ main,
   font-size: 3rem;
   transform: rotate(-90deg);
   text-align: center;
-  width: 15%;
+  width: 18%;
   margin-top: 4rem;
   position: fixed;
   left: 0;
@@ -96,15 +96,22 @@ label {
 // .book-now,
 .date-range-select,
 .view-bookings {
-  background-color: $elements-bkgd-color;
   @include card-corners();
+  background-color: $elements-bkgd-color;
+  box-shadow: $card-shadow;
 }
 
 .date-range-select {
   @include flex-column-center();
   height: 14rem;
-  margin: 5rem 5rem 5rem 0;
+  // margin: 5rem 5rem 5rem 0;
   padding: 1.5rem 2rem 1.5rem 2rem;
+  // box-shadow: $card-shadow;
+}
+
+#start-date,
+#end-date {
+  box-shadow: $card-shadow;
 }
 
 // input[type="date"],

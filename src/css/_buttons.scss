@@ -11,7 +11,8 @@
 
 input[type="date"],
 input[type="submit"],
-input[type="button"] {
+input[type="button"],
+.return-to-dashboard {
   @include input-styling();
   @include card-corners();
   transition: $transition-button;
@@ -19,8 +20,10 @@ input[type="button"] {
 
 input[type="submit"],
 .room-type-filter-button,
-.clear-all {
+.clear-all,
+.return-to-dashboard {
   background-color: gray;
+  box-shadow: $card-shadow;
   &:hover {
     background-color: black;
     color: white;
