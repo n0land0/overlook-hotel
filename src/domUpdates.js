@@ -63,7 +63,7 @@ const domUpdates = {
         </article>
       `
     })
-    totalSpent.innerText = `$${currentCustomer.totalSpent.toFixed(2)}`;
+    totalSpent.innerText = `${currentCustomer.totalSpent.toLocaleString('en-US', {style: 'currency', currency:'USD'})}`;
   },
 
   renderMinimumDates() {
@@ -144,7 +144,8 @@ const domUpdates = {
   },
 
   fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
-    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    // modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from ${targetRoom.costPerNight.toLocaleString('en-US', {style: 'currency', currency:'USD'})}/night`
     modalContent.innerHTML = `
       <img src="../images/${targetRoom.roomType}.png" alt="">
       <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
