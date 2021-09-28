@@ -95,7 +95,6 @@ dateRangeSelect.addEventListener("submit", () => {
       dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
     )
   );
-
   domUpdates.renderRoomCards(hotel);
 })
 
@@ -115,23 +114,7 @@ filterByRoomType.addEventListener("click", () => {
   }
 })
 
-// function postBookings(booking) {
-//   Promise.all(
-//     booking.singleBookings.map(booking => {
-//       return updateBookings(booking.userID, booking.date, booking.roomNumber)
-//     })).then(() => {
-//     fetchData('bookings')
-//       .then(data => hotel.bookings = data.bookings)
-//       .then(() => showConfirmation())
-//       .then(() => newCustomer.getBookings(hotel))
-//       .then(() => displayDashboardInfo())
-//       .catch(error => displayErrorMessage(error, bookingPreview))
-//   })
-// }
-
 bookNowButton.addEventListener("click", () => {
-  // let datesBooked = hotel.generateDateRange(dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD"))
-
   Promise.all(hotel.generateDateRange(
     dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
   ).map(date =>
@@ -167,6 +150,13 @@ containerRoomCards.addEventListener("click", () => {
     let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
     let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
     let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
+
+    // domUpdates.fillModalDetails(domUpdates.targetSelectedRoom(event));
+    // domUpdates.fillModalDetails(
+    //   domUpdates.getTargetRoomDetails(hotel,
+    //     domUpdates.targetSelectedRoom(event)
+    //   )
+    // );
 
     modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
     modalContent.innerHTML = `
