@@ -115,6 +115,14 @@ const rooms = [
       "bedSize": "queen",
       "numBeds": 2,
       "costPerNight": 231.46
+  },
+  {
+      "number": 14,
+      "roomType": "residential suite",
+      "bidet": false,
+      "bedSize": "twin",
+      "numBeds": 1,
+      "costPerNight": 457.88
   }
 ];
 

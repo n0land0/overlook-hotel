@@ -26,6 +26,10 @@ const modalTitle = document.querySelector(".modal__title");
 const modalContent = document.querySelector(".modal__content");
 const bookNowButton = document.querySelector(".modal__btn");
 
+const loginForm = document.getElementById("login-form");
+const usernameField = document.getElementById("username-field");
+const passwordField = document.getElementById("password-field");
+
 // methods
 const domUpdates = {
   renderUser(currentCustomer) {
@@ -87,6 +91,11 @@ const domUpdates = {
     }
   },
 
+  showError(error, container) {
+    console.warn(error);
+    container.innerHTML = `<span class="server-error-message">WHOA SERVER DOWN BRAH</span>`;
+  },
+
   show(element) {
     element.classList.remove('hidden');
   },
@@ -103,7 +112,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton
+  greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, loginForm, usernameField, passwordField
 };
 
 export default domUpdates;

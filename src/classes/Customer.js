@@ -2,8 +2,8 @@ class Customer {
   constructor(customerObj) {
     this.id = customerObj.id;
     this.name = customerObj.name;
-    // this.username;
-    // this.password;
+    this.username = `customer${this.id}`;
+    this.password = "overlook2021";
     this.bookings = []; //any room bookings I have made
     this.totalSpent = 0;
   }
