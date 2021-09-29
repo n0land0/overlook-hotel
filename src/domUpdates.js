@@ -54,7 +54,7 @@ const domUpdates = {
     currentCustomer.bookings.forEach(bookingObj => {
       bookingObj.getRoomType(roomsArr);
       containerBookingCards.innerHTML += `
-        <article class="booking-card">
+        <article class="booking-card" tabindex="0">
           <p>${bookingObj.date}</p>
           <p>${bookingObj.id}</p>
           <p>${bookingObj.roomType}</p>
