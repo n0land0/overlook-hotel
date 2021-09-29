@@ -21,7 +21,7 @@
   background-color: white;
   box-shadow: $card-shadow;
   width: 15rem;
-  height: 20rem;
+  height: 15rem;
   margin: 2rem;
   &:hover {
     background-color: gray;
@@ -33,6 +33,7 @@
 
 .room-card img {
   @include room-img();
+  height: 80%;
 }
 
 .no-results-options {

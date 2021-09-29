@@ -23,7 +23,7 @@ import {
 // DOM-related functions
 import domUpdates from "./domUpdates";
 const {
-  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginView, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greeting, greetingContainer, viewBookings, totalSpent, containerBookingCards, startDate, endDate, showRooms, dateRangeSelect, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginView, loginForm, usernameField, passwordField, invalidUsername, invalidPassword, navDashboardButton
 } = domUpdates;
 
 // data classes
@@ -56,7 +56,9 @@ const storeFetchedData = (responseArray) => {
 
 loginForm.addEventListener("submit", () => {
   event.preventDefault();
-  currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
+  if ( 0 < usernameField.value.split("customer")[1] <= 50 ) {
+    currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
+  }
 
   if (!currentCustomer) {
     domUpdates.show(invalidUsername)
@@ -82,6 +84,10 @@ loginForm.addEventListener("submit", () => {
   }
 })
 
+navDashboardButton.addEventListener("click", () => {
+  domUpdates.show(dashboardView);
+  domUpdates.hide(roomSelectView);
+})
 
 dateRangeSelect.addEventListener("submit", () => {
   event.preventDefault();
@@ -170,7 +176,3 @@ modalContent.addEventListener("click", () => {
     domUpdates.hide(roomSelectView);
   }
 })
-
-const checkData = dataSet => {
-  return !Object.keys(dataSet).length || Object.values(dataSet).includes(undefined);
-}
