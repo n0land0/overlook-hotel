@@ -60,14 +60,8 @@ loginForm.addEventListener("submit", () => {
     currentCustomer = hotel.customers.find(cust => cust.username === usernameField.value);
   }
 
-  if (!currentCustomer) {
-    domUpdates.show(invalidUsername)
-    domUpdates.hide(invalidPassword)
-  }
-
-  if (currentCustomer.password !== passwordField.value) {
+  if (!currentCustomer || currentCustomer.password !== passwordField.value) {
     domUpdates.show(invalidPassword)
-    domUpdates.hide(invalidUsername)
   }
 
   if (currentCustomer.password === passwordField.value) {
@@ -161,6 +155,14 @@ bookNowButton.addEventListener("click", () => {
     .then(() => {
       currentCustomer.populateBookings(hotel.bookings)
       currentCustomer.calculateTotalSpent(hotel.rooms)
+
+      hotel.populateAvailableRooms(
+        hotel.generateDateRange(
+          dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+        )
+      );
+      domUpdates.renderRoomCards(hotel);
+      console.log(hotel.availableRooms)
 
       domUpdates.renderBookings(currentCustomer, hotel.rooms);
       domUpdates.confirmBooking();
