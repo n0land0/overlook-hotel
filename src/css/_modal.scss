@@ -234,6 +234,7 @@
 
 .modal__close {
   font-size: 24px;
+  align-self: flex-start;
 }
 
 .modal__content {
@@ -243,6 +244,12 @@
   color: rgba(0,0,0,.8);
   text-align: center;
   font-size: 2.25rem;
+}
+
+.modal__content img {
+  @include room-img();
+  @include card-corners();
+  box-shadow: $card-shadow;
 }
 
 .modal__footer {
@@ -256,7 +263,15 @@
   // border-radius: 4px;
   // -webkit-appearance: none;
   @include input-styling();
+  @include card-corners();
+  transition: $transition-button;
   font-size: 2.25rem;
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.025);
+  }
 }
 
 /**************************

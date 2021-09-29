@@ -15,7 +15,6 @@ describe('Room', () => {
   let room;
   beforeEach(() => {
     room = new Room(rooms[6]);
-    // room.populateBookedDates(bookings);
   });
 
   it('should be a function', () => {
@@ -47,13 +46,4 @@ describe('Room', () => {
 
     assert.equal(didFilterFail, false);
   });
-
-  it.skip('', () => {});
-
-  it.skip('', () => {});
-
-    // assert.property();
-    // assert.equal();
-    // assert.deepEqual();
-    // assert.includeMembers();
 });

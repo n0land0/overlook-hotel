@@ -1,0 +1,24 @@
+@import '_mixins';
+
+.login-view {
+  @include flex-row-center();
+  width: 100%;
+  height: 100vh;
+}
+
+.login-form {
+  @include flex-column-center();
+  @include card-corners();
+  background-color: $elements-bkgd-color;
+  padding: 2rem;
+  box-shadow: $card-shadow;
+}
+
+.username-field,
+.password-field {
+  @include card-corners();
+  font-family: $main-font;
+  font-size: 1rem;
+  padding: .5rem;
+  box-shadow: $card-shadow;
+}

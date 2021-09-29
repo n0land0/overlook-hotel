@@ -123,8 +123,4 @@ describe('Hotel', () => {
 
     assert.deepEqual(datesBooked, ["2020/01/27", "2020/01/28", "2020/01/29"])
   });
-    // assert.property();
-    // assert.equal();
-    // assert.deepEqual();
-    // assert.includeMembers();
 });

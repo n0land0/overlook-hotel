@@ -61,13 +61,4 @@ describe('Booking', () => {
 
     assert.equal(booking.roomType, rooms[6].roomType);
   });
-
-  it.skip('', () => {});
-
-  it.skip('', () => {});
-
-  // assert.property();
-  // assert.equal();
-  // assert.deepEqual();
-  // assert.includeMembers();
 });

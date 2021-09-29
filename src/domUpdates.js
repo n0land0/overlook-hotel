@@ -4,6 +4,7 @@ import MicroModal from 'micromodal';
 
 // SELECTORS
 // login
+const loginView = document.getElementById("login-view");
 const loginForm = document.getElementById("login-form");
 const usernameField = document.getElementById("username-field");
 const invalidUsername = document.getElementById("invalid-username");
@@ -53,7 +54,7 @@ const domUpdates = {
     currentCustomer.bookings.forEach(bookingObj => {
       bookingObj.getRoomType(roomsArr);
       containerBookingCards.innerHTML += `
-        <article class="booking-card">
+        <article class="booking-card" tabindex="0">
           <p>${bookingObj.date}</p>
           <p>${bookingObj.id}</p>
           <p>${bookingObj.roomType}</p>
@@ -62,7 +63,7 @@ const domUpdates = {
         </article>
       `
     })
-    totalSpent.innerText = `$${currentCustomer.totalSpent.toFixed(2)}`;
+    totalSpent.innerText = `${currentCustomer.totalSpent.toLocaleString('en-US', {style: 'currency', currency:'USD'})}`;
   },
 
   renderMinimumDates() {
@@ -89,7 +90,7 @@ const domUpdates = {
       if (hotel.availableRooms[key].length) {
         hotel.availableRooms[key].forEach(roomObj => {
           containerRoomCards.innerHTML += `
-            <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1">
+            <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1" tabindex="0">
               <img src="../images/${roomObj.roomType}.png" alt="" data-micromodal-trigger="modal-1">
               <p>${roomObj.number}</p>
               <p>${roomObj.costPerNight}</p>
@@ -102,11 +103,16 @@ const domUpdates = {
       }
     })
     if (!containerRoomCards.innerHTML.length) {
+      this.hide(filterByRoomType);
       containerRoomCards.innerHTML = `
-        <p>we're sorry, but we don't have any available rooms matching your current search.</p>
-        <p>would you like to start another search?</p>
-        <button>yes please!</button>
-        <button>no thanks.</button>
+        <article class="no-results-msg">
+          <p>we're sorry, but we don't have any available rooms matching your current search.</p>
+          <p>would you like to start another search?</p>
+          <div class="no-results-options">
+            <button id="yes-please">yes please!</button>
+            <button id="no-thanks">no thanks.</button>
+          </div>
+        </article>
       `;
     }
   },
@@ -127,8 +133,6 @@ const domUpdates = {
     roomTypeFilters.forEach(roomTypeButton => {
       roomTypeButton.checked = false;
       roomTypeButton.classList.remove("button-selected");
-      console.log(roomTypeButton.classList)
-      console.log(roomTypeButton.checked)
     });
 
     clearAllButton.classList.add("inactive");
@@ -143,7 +147,7 @@ const domUpdates = {
   },
 
   fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
-    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
+    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from ${targetRoom.costPerNight.toLocaleString('en-US', {style: 'currency', currency:'USD'})}/night`
     modalContent.innerHTML = `
       <img src="../images/${targetRoom.roomType}.png" alt="">
       <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
@@ -156,7 +160,7 @@ const domUpdates = {
   confirmBooking() {
     domUpdates.hide(modalFooter);
     modalTitle.innerText = "Thanks, your booking is confirmed!";
-    modalContent.innerHTML = `<button id="return-to-dashboard" data-micromodal-close>take me back to my dashboard</button>`;
+    modalContent.innerHTML = `<button id="return-to-dashboard" class="return-to-dashboard" data-micromodal-close tabindex="1">take me back to my dashboard</button>`;
   },
 
   toggleCheckedStatus(element) {
@@ -186,7 +190,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword
+  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword, loginView
 };
 
 export default domUpdates;

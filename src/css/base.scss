@@ -2,6 +2,9 @@
 @import '_variables';
 @import '_mixins';
 @import '_modal';
+@import '_buttons';
+@import '_roomselect';
+@import '_login';
 
 ::-webkit-scrollbar {
   width: 0;
@@ -17,9 +20,6 @@ html {
 
 body {
   @include landing-background();
-  // font-family: $main-font;
-  // background-image: $landing-background;
-  // background-image: url("../images/pineapple_PNG2738.png");
 }
 
 header,
@@ -30,14 +30,12 @@ nav {
 header {
   display: flex;
   width: 100%;
-  // font-family: $main-font;
   font-size: 10rem;
   z-index: 1;
   position: fixed;
   bottom: 0;
   padding-bottom: 1rem;
   background: $gradient-header;
-    // padding-bottom: 10px;
 }
 
 nav {
@@ -55,27 +53,16 @@ nav {
 
 main,
 .dashboard-view {
-// .dashboard-view,
-// .room-select-view {
   @include flex-row-center();
   justify-content: space-between;
-  width: 100%;
-  // height: 100%;
-}
-
-.room-select-view {
-  @include flex-column-center();
-  // justify-content: space-between;
   width: 100%;
 }
 
 .container-book-now-and-view-bookings {
   display: flex;
   justify-content: space-around;
-  // align-items: center;
   height: 54vh;
   width: 100%;
-  // margin-bottom: 5rem;
   margin-top: 5rem;
 }
 
@@ -83,7 +70,7 @@ main,
   font-size: 3rem;
   transform: rotate(-90deg);
   text-align: center;
-  width: 15%;
+  width: 18%;
   margin-top: 4rem;
   position: fixed;
   left: 0;
@@ -94,54 +81,22 @@ label {
   @include flex-column-center();
 }
 
-// .book-now,
 .date-range-select,
 .view-bookings {
-  background-color: $elements-bkgd-color;
   @include card-corners();
+  background-color: $elements-bkgd-color;
+  box-shadow: $card-shadow;
 }
 
 .date-range-select {
   @include flex-column-center();
   height: 14rem;
-  margin: 5rem 5rem 5rem 0;
   padding: 1.5rem 2rem 1.5rem 2rem;
 }
 
-input[type="date"],
-input[type="submit"],
-input[type="button"] {
-  @include input-styling();
-  @include card-corners();
-  transition: $transition-button;
-}
-
-input[type="submit"],
-.room-type-filter-button,
-.clear-all {
-  background-color: gray;
-  &:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    transform: scale(1.025);
-  }
-}
-
-.button-selected {
-  background-color: navy;
-  color: white;
-  &:hover {
-    background-color: navy;
-  }
-}
-
-::-webkit-calendar-picker-indicator {
-  transition: $transition-button;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.025);
-  }
+#start-date,
+#end-date {
+  box-shadow: $card-shadow;
 }
 
 .view-bookings {
@@ -163,7 +118,6 @@ input[type="submit"],
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  // position: relative;
 }
 
 .booking-card {
@@ -174,40 +128,7 @@ input[type="submit"],
   padding: 1rem;
   margin: 0 2rem 2rem 2rem;
   @include card-corners();
-}
-
-.room-select-view {
-  height: 75vh;
-}
-
-.container-room-cards {
-  @include flex-row-center();
-  flex-wrap: wrap;
-  width: 100%;
-  height: 42rem;
-  overflow: scroll;
-}
-
-.room-card {
-  @include flex-column-center();
-  @include card-corners();
-  background-color: white;
-  width: 15rem;
-  height: 20rem;
-  margin: 2rem;
-}
-
-.room-card img,
-.modal__content img {
-  width: 100%;
-  height: 55%;
-  filter: opacity(.6);
-}
-
-.inactive {
-  cursor: default;
-  filter: brightness(50%);
-  pointer-events: none;
+  box-shadow: $card-shadow;
 }
 
 .hidden {

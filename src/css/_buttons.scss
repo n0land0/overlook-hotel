@@ -1,0 +1,49 @@
+@import '_mixins';
+@import '_variables';
+
+::-webkit-calendar-picker-indicator {
+  transition: $transition-button;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.025);
+  }
+}
+
+input[type="date"],
+input[type="submit"],
+input[type="button"],
+.return-to-dashboard,
+.no-results-options button {
+  @include input-styling();
+  @include card-corners();
+  transition: $transition-button;
+}
+
+input[type="submit"],
+.room-type-filter-button,
+.clear-all,
+.return-to-dashboard,
+.no-results-options button {
+  background-color: gray;
+  box-shadow: $card-shadow;
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.025);
+  }
+}
+
+.button-selected {
+  background-color: navy;
+  color: white;
+  &:hover {
+    background-color: navy;
+  }
+}
+
+.inactive {
+  cursor: default;
+  filter: brightness(50%);
+  pointer-events: none;
+}
