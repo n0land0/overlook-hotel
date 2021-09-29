@@ -13,7 +13,8 @@ input[type="date"],
 input[type="submit"],
 input[type="button"],
 .return-to-dashboard,
-.no-results-options button {
+.no-results-options button,
+.nav-dashboard-button {
   @include input-styling();
   @include card-corners();
   transition: $transition-button;
@@ -23,15 +24,21 @@ input[type="submit"],
 .room-type-filter-button,
 .clear-all,
 .return-to-dashboard,
-.no-results-options button {
+.no-results-options button,
+.nav-dashboard-button {
   background-color: gray;
   box-shadow: $card-shadow;
   &:hover {
     background-color: black;
     color: white;
     cursor: pointer;
-    transform: scale(1.025);
+    transform: scale(1.0025);
   }
+}
+
+.nav-dashboard-button {
+  position: fixed;
+  right: 0;
 }
 
 .button-selected {

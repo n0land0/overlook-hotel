@@ -15,6 +15,7 @@
   </header>
   <nav id="greeting-container" class="hidden">
     <h2 id="greeting" class="greeting">Welcome, Hingle McCringleberry!</h2>
+    <button id="nav-dashboard-button" class="nav-dashboard-button">go to my dashboard</button>
   </nav>
   <main>
     <section id="login-view" class="login-view">
@@ -22,11 +23,11 @@
         <label for="username-field">username
           <input id="username-field" class="username-field" type="text" placeholder="username" required>
         </label>
-        <p id="invalid-username" class="hidden">invalid username</p>
+        <!-- <p id="invalid-username" class="hidden">invalid username</p> -->
         <label for="password-field">password
           <input id="password-field" class="password-field" type="password" placeholder="password" required>
         </label>
-        <p id="invalid-password" class="hidden">invalid password</p>
+        <p id="invalid-password" class="hidden">invalid credentials</p>
         <input type="submit" value="go to my dashboard">
       </form>
     </section>
@@ -47,8 +48,10 @@
         </section>
         <section id="view-bookings" class="view-bookings">
           <section id="container-booking-header" class="container-booking-header">
-            <h2>My Bookings</h2>
-            <h2>Total Spent to Date: <span id="total-spent">$0</span></h2>
+            <article id="booking-header" class="booking-header">
+              <h2>My Bookings</h2>
+              <h2>Total Spent to Date: <span id="total-spent">$0</span></h2>
+            </article>
           </section>
           <section id="container-booking-cards" class="container-booking-cards">
           </section>

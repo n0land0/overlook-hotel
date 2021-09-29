@@ -16,6 +16,7 @@ const dashboardView = document.getElementById("dashboard-view");
   // user-specific greeting
 const greetingContainer = document.getElementById("greeting-container");
 const greeting = document.getElementById("greeting");
+const navDashboardButton = document.getElementById("nav-dashboard-button");
   // date search form
 const dateRangeSelect = document.getElementById("date-range-select");
 const startDate = document.getElementById("start-date");
@@ -56,9 +57,9 @@ const domUpdates = {
       containerBookingCards.innerHTML += `
         <article class="booking-card" tabindex="0">
           <p>${bookingObj.date}</p>
-          <p>${bookingObj.id}</p>
+          <p>id #${bookingObj.id}</p>
           <p>${bookingObj.roomType}</p>
-          <p>${bookingObj.roomNumber}</p>
+          <p>room #${bookingObj.roomNumber}</p>
           <p>$${bookingObj.totalCost.toFixed(2)}</p>
         </article>
       `
@@ -91,12 +92,9 @@ const domUpdates = {
         hotel.availableRooms[key].forEach(roomObj => {
           containerRoomCards.innerHTML += `
             <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1" tabindex="0">
+              <p>room #${roomObj.number}</p>
               <img src="../images/${roomObj.roomType}.png" alt="" data-micromodal-trigger="modal-1">
-              <p>${roomObj.number}</p>
-              <p>${roomObj.costPerNight}</p>
-              <p>${roomObj.roomType}</p>
-              <p>${roomObj.numBeds} x ${roomObj.bedSize}</p>
-              <p>${roomObj.bidet}</p>
+              <p>${roomObj.roomType} - from ${roomObj.costPerNight.toLocaleString('en-US', {style: 'currency', currency:'USD'})}/night</p>
             </article>
           `
         })
@@ -140,14 +138,14 @@ const domUpdates = {
 
   getTargetRoomDetails(hotel, targetRoomNumber) {
       let targetRoom = hotel.rooms.find(roomObj => roomObj.number === targetRoomNumber)
-      let bidetStatus = targetRoom.bidet ? "Bidet included" : "Bidet not included";
+      let bidetStatus = targetRoom.bidet ? "bidet included" : "bidet not included";
       let bedPlural = (targetRoom.numBeds > 1) ? "beds" : "bed"
 
       return [targetRoom, bidetStatus, bedPlural];
   },
 
   fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
-    modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from ${targetRoom.costPerNight.toLocaleString('en-US', {style: 'currency', currency:'USD'})}/night`
+    modalTitle.innerText = `room #${targetRoom.number} - ${targetRoom.roomType} - from ${targetRoom.costPerNight.toLocaleString('en-US', {style: 'currency', currency:'USD'})}/night`
     modalContent.innerHTML = `
       <img src="../images/${targetRoom.roomType}.png" alt="">
       <p>${targetRoom.numBeds} ${targetRoom.bedSize} ${bedPlural}</p>
@@ -190,7 +188,7 @@ const domUpdates = {
     element.classList = '';
   },
 
-  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword, loginView
+  greetingContainer, greeting, viewBookings, totalSpent, containerBookingCards, dateRangeSelect, startDate, endDate, showRooms, dashboardView, roomSelectView, containerRoomCards, filterByRoomType, roomTypeFilters, clearAllButton, modalTitle, modalContent, bookNowButton, modalFooter, returnToDashboardButton, loginForm, usernameField, passwordField, invalidUsername, invalidPassword, loginView, navDashboardButton
 };
 
 export default domUpdates;
