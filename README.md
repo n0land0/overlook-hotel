@@ -1,8 +1,8 @@
-# Overlook Hotel
+# Hötel for Dögs
 
 ## Abstract
 
-What's Cookin' is a recipe tracking / meal planning application that allows users to view their favorite recipes and plan shopping trips around them. The idea is similar to sites like All Recipes or New York Times Cooking. Users should view a list of recipes, favorite their own recipes, and choose recipes to cook.
+Hötel for Dögs is a hotel booking application allowing a user to plan future hotel stays and view their booking history. Like most hotel sites, the app allows the user to search for specific dates and room types, and shares price and amenity information as well.
 
 ## Installation
 
@@ -14,8 +14,6 @@ What's Cookin' is a recipe tracking / meal planning application that allows user
 6. Start messing around on the page!
 
 ## Usage and Demonstration
-
-Please see our demo video [here](https://www.youtube.com/watch?v=aHChq0GsRFE).
 
 ## Programming Languages and Dependencies
 
@@ -38,22 +36,22 @@ Please see our demo video [here](https://www.youtube.com/watch?v=aHChq0GsRFE).
 
 **Wins**
 
-- We gained better understanding of asynchronous JS
-  - We have used DOM API to some extent in previous projects, but by making extensive use of the fetch API, we had to learn how to control the flow and timing and events
-- Our app achieved excellent accessiblity according to the Lighthouse score (97)
-- We managed to dry our CSS file using SCSS
-- We separate data structure (user info, recipes, ingredients)and DOM manipulations into different folders.
+- Class architecture turned out to be quite modular and powerful - hotel had storage capabilites, but giving each class access to the others turned out to make implementation code easier to write
+- Repeated successful use of POST requests, iteratively and in a timely manner, to display updated API info for multiple bookings on the page without refresh
+- Perfect accessibility score from Lighthouse
+- Use of multiple partial files for JS and SCSS code for improved organization
 
 **Challenges**
 
-- Error handling in our fetch POST and GET in response to different types of network errors
-- Keeping a smooth project board workflow
+- Experimenting with the structure of event handlers helped in some ways and hurt in others
+- In hindsight, use of a Login class and reimagined implementation of Customer class would have made some excessive conditionals cleaner
+- Lots of styling was necessary to make even the MVP
 
 ## Future Additions
 
-- Be able to tab through drop down menu
-- Be able to filter recipes by tags based on search result.
-- Display a featured blog post at page load.
+- Manager functionality
+- Advanced filtering and adjustable dates on search results
+- Smoother transitions
 
 ## Contributions
 
