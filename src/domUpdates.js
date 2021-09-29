@@ -90,7 +90,7 @@ const domUpdates = {
       if (hotel.availableRooms[key].length) {
         hotel.availableRooms[key].forEach(roomObj => {
           containerRoomCards.innerHTML += `
-            <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1">
+            <article id="${roomObj.number}" class="room-card" data-micromodal-trigger="modal-1" tabindex="0">
               <img src="../images/${roomObj.roomType}.png" alt="" data-micromodal-trigger="modal-1">
               <p>${roomObj.number}</p>
               <p>${roomObj.costPerNight}</p>
@@ -162,7 +162,7 @@ const domUpdates = {
   confirmBooking() {
     domUpdates.hide(modalFooter);
     modalTitle.innerText = "Thanks, your booking is confirmed!";
-    modalContent.innerHTML = `<button id="return-to-dashboard" class="return-to-dashboard" data-micromodal-close>take me back to my dashboard</button>`;
+    modalContent.innerHTML = `<button id="return-to-dashboard" class="return-to-dashboard" data-micromodal-close tabindex="1">take me back to my dashboard</button>`;
   },
 
   toggleCheckedStatus(element) {
