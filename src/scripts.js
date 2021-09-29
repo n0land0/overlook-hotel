@@ -116,6 +116,7 @@ filterByRoomType.addEventListener("click", () => {
 
 containerRoomCards.addEventListener("click", () => {
   if (event.target.id === "yes-please") {
+    domUpdates.clearFilters();
     domUpdates.show(filterByRoomType);
     domUpdates.show(dashboardView);
     domUpdates.hide(roomSelectView);
@@ -133,7 +134,8 @@ bookNowButton.addEventListener("click", () => {
       dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
     ).map(date =>
       addBooking(currentCustomer.id, date, targetRoomNumber)
-      .then(data => console.log("After POST", data))
+      // .then(data => console.log("After POST", data))
+      .catch(error => domUpdates.showError(error, roomSelectView))
     )
   )
   .then(() => {
