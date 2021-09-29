@@ -149,7 +149,6 @@ const domUpdates = {
   },
 
   fillModalDetails([targetRoom, bidetStatus, bedPlural]) {
-    // modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from $${targetRoom.costPerNight.toFixed(2)}/night`
     modalTitle.innerText = `Room #${targetRoom.number} - ${targetRoom.roomType} - from ${targetRoom.costPerNight.toLocaleString('en-US', {style: 'currency', currency:'USD'})}/night`
     modalContent.innerHTML = `
       <img src="../images/${targetRoom.roomType}.png" alt="">

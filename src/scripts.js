@@ -134,7 +134,6 @@ bookNowButton.addEventListener("click", () => {
       dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
     ).map(date =>
       addBooking(currentCustomer.id, date, targetRoomNumber)
-      // .then(data => console.log("After POST", data))
       .catch(error => domUpdates.showError(error, roomSelectView))
     )
   )
@@ -147,8 +146,6 @@ bookNowButton.addEventListener("click", () => {
 
       domUpdates.renderBookings(currentCustomer, hotel.rooms);
       domUpdates.confirmBooking();
-      // console.log("After GET", hotel.bookings)
-      // console.log("After GET", currentCustomer.bookings)
     })
     .catch(error => domUpdates.showError(error, roomSelectView))
   })
