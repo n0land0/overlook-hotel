@@ -133,8 +133,6 @@ const domUpdates = {
     roomTypeFilters.forEach(roomTypeButton => {
       roomTypeButton.checked = false;
       roomTypeButton.classList.remove("button-selected");
-      console.log(roomTypeButton.classList)
-      console.log(roomTypeButton.checked)
     });
 
     clearAllButton.classList.add("inactive");

@@ -76,7 +76,6 @@ loginForm.addEventListener("submit", () => {
     domUpdates.renderBookings(currentCustomer, hotel.rooms);
     domUpdates.renderMinimumDates();
 
-    // domUpdates.hide(loginForm);
     domUpdates.hide(loginView);
     domUpdates.show(greetingContainer);
     domUpdates.show(dashboardView);
@@ -115,6 +114,19 @@ filterByRoomType.addEventListener("click", () => {
 })
 
 containerRoomCards.addEventListener("click", () => {
+  if (event.target.parentNode.classList.contains("room-card") ||
+  event.target.classList.contains("room-card")) {
+
+    if (event.target.parentNode.classList.contains("room-card")) {
+      targetRoomNumber = parseInt(event.target.parentNode.id);
+    }
+    if (event.target.classList.contains("room-card")) {
+      targetRoomNumber = parseInt(event.target.id);
+    }
+
+    domUpdates.fillModalDetails(domUpdates.getTargetRoomDetails(hotel, targetRoomNumber));
+  }
+
   if (event.target.id === "yes-please") {
     domUpdates.clearFilters();
     domUpdates.show(filterByRoomType);
@@ -156,21 +168,6 @@ modalContent.addEventListener("click", () => {
     domUpdates.show(modalFooter);
     domUpdates.show(dashboardView);
     domUpdates.hide(roomSelectView);
-  }
-})
-
-containerRoomCards.addEventListener("click", () => {
-  if (event.target.parentNode.classList.contains("room-card") ||
-  event.target.classList.contains("room-card")) {
-
-    if (event.target.parentNode.classList.contains("room-card")) {
-      targetRoomNumber = parseInt(event.target.parentNode.id);
-    }
-    if (event.target.classList.contains("room-card")) {
-      targetRoomNumber = parseInt(event.target.id);
-    }
-
-    domUpdates.fillModalDetails(domUpdates.getTargetRoomDetails(hotel, targetRoomNumber));
   }
 })
 
