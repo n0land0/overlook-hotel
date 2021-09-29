@@ -3,7 +3,6 @@
 @import '_mixins';
 @import '_modal';
 @import '_buttons';
-// @import '_dashboard';
 @import '_roomselect';
 @import '_login';
 
@@ -54,27 +53,16 @@ nav {
 
 main,
 .dashboard-view {
-// .dashboard-view,
-// .room-select-view {
   @include flex-row-center();
   justify-content: space-between;
   width: 100%;
-  // height: 100%;
 }
-
-// .room-select-view {
-//   @include flex-column-center();
-//   // justify-content: space-between;
-//   width: 100%;
-// }
 
 .container-book-now-and-view-bookings {
   display: flex;
   justify-content: space-around;
-  // align-items: center;
   height: 54vh;
   width: 100%;
-  // margin-bottom: 5rem;
   margin-top: 5rem;
 }
 
@@ -93,7 +81,6 @@ label {
   @include flex-column-center();
 }
 
-// .book-now,
 .date-range-select,
 .view-bookings {
   @include card-corners();
@@ -104,51 +91,13 @@ label {
 .date-range-select {
   @include flex-column-center();
   height: 14rem;
-  // margin: 5rem 5rem 5rem 0;
   padding: 1.5rem 2rem 1.5rem 2rem;
-  // box-shadow: $card-shadow;
 }
 
 #start-date,
 #end-date {
   box-shadow: $card-shadow;
 }
-
-// input[type="date"],
-// input[type="submit"],
-// input[type="button"] {
-//   @include input-styling();
-//   @include card-corners();
-//   transition: $transition-button;
-// }
-
-// input[type="submit"],
-// .room-type-filter-button,
-// .clear-all {
-//   background-color: gray;
-//   &:hover {
-//     background-color: black;
-//     color: white;
-//     cursor: pointer;
-//     transform: scale(1.025);
-//   }
-// }
-
-// .button-selected {
-//   background-color: navy;
-//   color: white;
-//   &:hover {
-//     background-color: navy;
-//   }
-// }
-//
-// ::-webkit-calendar-picker-indicator {
-//   transition: $transition-button;
-//   &:hover {
-//     cursor: pointer;
-//     transform: scale(1.025);
-//   }
-// }
 
 .view-bookings {
   @include flex-column-center();
@@ -169,7 +118,6 @@ label {
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  // position: relative;
 }
 
 .booking-card {
@@ -182,44 +130,6 @@ label {
   @include card-corners();
   box-shadow: $card-shadow;
 }
-
-// .room-select-view {
-//   height: 75vh;
-// }
-
-// .container-room-cards {
-//   @include flex-row-center();
-//   flex-wrap: wrap;
-//   width: 100%;
-//   height: 42rem;
-//   overflow: scroll;
-// }
-
-// .room-card {
-//   @include flex-column-center();
-//   @include card-corners();
-//   background-color: white;
-//   width: 15rem;
-//   height: 20rem;
-//   margin: 2rem;
-// }
-//
-// .room-card img {
-//   @include room-img();
-// }
-
-// .modal__content img {
-//   @include room-img();
-//   // width: 100%;
-//   // height: 55%;
-//   // filter: opacity(.6);
-// }
-
-// .inactive {
-//   cursor: default;
-//   filter: brightness(50%);
-//   pointer-events: none;
-// }
 
 .hidden {
   display: none;
