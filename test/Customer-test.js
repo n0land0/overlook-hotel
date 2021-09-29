@@ -48,17 +48,4 @@ describe('Customer', () => {
 
     assert.equal(didFilterFail, false);
   });
-
-  it.skip('', () => {});
-
-  it.skip('', () => {});
-
-  it.skip('', () => {});
-
-  it.skip('', () => {});
-
-  // assert.property();
-  // assert.equal();
-  // assert.deepEqual();
-  // assert.includeMembers();
 });

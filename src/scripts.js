@@ -128,12 +128,14 @@ containerRoomCards.addEventListener("click", () => {
 })
 
 bookNowButton.addEventListener("click", () => {
-  Promise.all(hotel.generateDateRange(
-    dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
-  ).map(date =>
-    addBooking(currentCustomer.id, date, targetRoomNumber)
-    .then(data => console.log("After POST", data))
-  ))
+  Promise.all(
+    hotel.generateDateRange(
+      dayjs(startDate.value).format("YYYY/MM/DD"), dayjs(endDate.value).format("YYYY/MM/DD")
+    ).map(date =>
+      addBooking(currentCustomer.id, date, targetRoomNumber)
+      .then(data => console.log("After POST", data))
+    )
+  )
   .then(() => {
     getAll("bookings")
     .then(bookingsArray => hotel.updateBookings(bookingsArray))
