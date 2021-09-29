@@ -162,12 +162,11 @@ bookNowButton.addEventListener("click", () => {
         )
       );
       domUpdates.renderRoomCards(hotel);
-      console.log(hotel.availableRooms)
 
       domUpdates.renderBookings(currentCustomer, hotel.rooms);
       domUpdates.confirmBooking();
     })
-    .catch(error => domUpdates.showError(error, roomSelectView))
+    .catch(error => domUpdates.showError(error, modalContent))
   })
 })
 
